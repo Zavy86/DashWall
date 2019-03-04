@@ -1,0 +1,75 @@
+/**
+ * Dashboard
+ *
+ * @package DashWall\Styles
+ * @author  Manuel Zavatta <manuel.zavatta@gmail.com>
+ * @link    https://github.com/Zavy86/dashwall
+ */
+
+/* reset */
+html,body,div,h1,h2,h3,h4,h5,h6,p{margin:0;padding:0;font-family:'Roboto',sans-serif;}
+
+/* body */
+body{font-size:16px;-webkit-font-smoothing:antialiased;margin-bottom:6px;}
+body::-webkit-scrollbar{width:0 !important;}
+
+/* debug */
+.debug{
+ margin:9px;
+ padding:9px;
+ background-color:#fefefe;
+ border:1px solid #ffffff;
+ color:#000000;
+ font-size:11px;
+}
+
+/* themes */
+body.dark{background-color:#000000;color:#ffffff;}
+body.light{background-color:#ffffff;color:#000000;}
+.tile.dark{background-color:#222222;color:#f0f0f0;}
+.tile.light{background-color:#f0f0f0;color:#222222;}
+
+/* disable text wrap */
+.nowrap{white-space:nowrap;}
+
+/* tile sizes */
+.w1{width:173px;}.h1{height:173px;}
+.w2{width:352px;}.h2{height:352px;}
+.w3{width:531px;}.h3{height:531px;}
+.w4{width:710px;}.h4{height:710px;}
+.w5{width:889px;}.h5{height:889px;}
+.w6{width:1068px;}.h6{height:1068px;}
+
+/* dashboard and tiles */
+.dashboard{
+ width:1080px;
+ margin-left:-6px;
+ text-align:left;
+ font-size:0;
+}
+.tile{
+ display:inline-block;
+ margin:6px 0 0 6px;
+ font-size:16px;
+ overflow:hidden;
+}
+.tile-title{
+ padding:3px;
+ text-align:left;
+ font-size:12px;
+}
+.tile-content{
+ padding:6px;
+ vertical-align: middle;
+ text-align: center;
+ height:calc(100% - 32px);
+}
+canvas{
+ width:100%;
+ height:100%;
+ /*border:1px solid white;*/
+}
+
+/* colors */
+.green-text{color:green;}
+.red-text{color:red;}
