@@ -1,0 +1,15 @@
+/nbproject/
+
+/.well-know/
+.htaccess
+
+config.inc.php
+
+/plugins/*
+!/plugins/dwp_kpi/
+!/plugins/dwp_trend/
+!/plugins/dwp_datetime/
+
+/tmp/*
+
+!index.php
