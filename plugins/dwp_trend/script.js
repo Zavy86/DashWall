@@ -7,7 +7,7 @@
  */
 function dwp_trend(options){
  // debug
- console.log("instagram_trend: "+options.uid);
+ console.log("trend: "+options.uid);
  console.log(options);
 
  /* initializations */
@@ -25,7 +25,7 @@ function dwp_trend(options){
  refresh();
 
  /* interval refresh */
- setInterval(function(){refresh();},options.refresh);
+ if(options.refresh>0){setInterval(function(){refresh();},options.refresh);}
 
  /* refresh function */
  function refresh(){
@@ -37,6 +37,7 @@ function dwp_trend(options){
    success:function(response){
     // alert if error
     if(response.error){
+     console.log("dwp_trend: "+options.uid);
      console.error(response);
     }else{
      update(response);
@@ -49,6 +50,7 @@ function dwp_trend(options){
  /* update function */
  function update(response){
   // debug
+  console.log("dwp_trend: "+options.uid);
   console.log(response);
   // build chart data
   chart_data={

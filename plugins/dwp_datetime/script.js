@@ -20,7 +20,7 @@ function dwp_datetime(options){
  refresh();
 
  /* interval refresh */
- setInterval(function(){refresh();},options.refresh);
+ if(options.refresh>0){setInterval(function(){refresh();},options.refresh);}
 
  /* refresh function */
  function refresh(){
@@ -34,6 +34,7 @@ function dwp_datetime(options){
    success:function(response){
     // alert if error
     if(response.error){
+     console.log("dwp_datetime: "+options.uid);
      console.error(response);
     }else{
      update(response);
@@ -43,12 +44,12 @@ function dwp_datetime(options){
   });
  }
 
-
+ /* update function */
  function update(response){
 
   var ctx=canvas.getContext('2d');
   ctx.font = "32px Roboto";
-  ctx.fillStyle = "#ffffff";
+  ctx.fillStyle = options.color;
 
   ctx.clearRect(0,0,canvas.width,canvas.height)
 
