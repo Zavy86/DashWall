@@ -5,6 +5,6 @@
  $configuration->db_type="mysql";
  $configuration->db_host="localhost";
  $configuration->db_name="dashwall";
- $configuration->db_user="developer";
- $configuration->db_pass="developer";
+ $configuration->db_user="username";
+ $configuration->db_pass="password";
 ?>
