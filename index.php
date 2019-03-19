@@ -9,7 +9,7 @@
 // include functions
 require_once("functions.inc.php");
 // initialize dashboard
-$dashboard=new Dashboard();
+$dashboard=new Dashboard($_REQUEST['dashboard']);
 // renderize dashboard
 $dashboard->render();
 // debug

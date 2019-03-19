@@ -42,6 +42,7 @@ define('DIR',ROOT.PATH);
 // include classes
 require_once(DIR."classes/Application.class.php");
 require_once(DIR."classes/Database.class.php");
+require_once(DIR."classes/Datasource.class.php");
 require_once(DIR."classes/Dashboard.class.php");
 require_once(DIR."classes/Tile.class.php");
 

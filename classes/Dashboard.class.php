@@ -13,18 +13,33 @@
 class Dashboard{
 
  /** Properties */
- protected $plugins_array;
+ protected $id;
+ protected $code;
+ protected $title;
+ protected $theme;
+ protected $orientation;
  protected $tiles_array;
+ protected $plugins_array;
 
  /**
   * Constructor
   */
- public function __construct(){
+ public function __construct($dashboard="default"){
+  // load object
+  if(!strlen($dashboard)){$dashboard="default";}
+  if(is_numeric($dashboard)){$dashboard=$GLOBALS['DB']->queryUniqueObject("SELECT * FROM `dashwall__dashboards` WHERE `id`='".$dashboard."'");}
+  if(is_string($dashboard)){$dashboard=$GLOBALS['DB']->queryUniqueObject("SELECT * FROM `dashwall__dashboards` WHERE `code`='".$dashboard."'");}
+  if(!$dashboard->id){die("Dashboard not found");}
   // initialize properties
-  $this->plugins_array=array();
+  $this->id=(int)$dashboard->id;
+  $this->code=stripslashes($dashboard->code);
+  $this->title=stripslashes($dashboard->title);
+  $this->theme=stripslashes($dashboard->theme);
+  $this->orientation=stripslashes($dashboard->orientation);
   $this->tiles_array=array();
+  $this->plugins_array=array();
   // get tiles
-  $tiles_results=$GLOBALS['DB']->queryObjects("SELECT * FROM `dashwall__tiles` ORDER BY `order` ASC");
+  $tiles_results=$GLOBALS['DB']->queryObjects("SELECT * FROM `dashwall__tiles` WHERE `fkDashboard`='".$this->id."' ORDER BY `order` ASC");
   foreach($tiles_results as $tile){
    // load tile
    $this->tiles_array[api_random()]=new Tile($tile);
@@ -56,16 +71,16 @@ class Dashboard{
   $return.="  <link type=\"text/css\" rel=\"stylesheet\" href=\"".$GLOBALS['APP']->path."styles/dashboard.css".(DEBUG?"?".api_random():null)."\" media=\"screen,projection\"/>\n";
   $return.="  <link type=\"image/png\" rel=\"icon\" href=\"".$GLOBALS['APP']->path."images/favicon.png\" sizes=\"any\"/>\n";
   $return.="  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\"/>\n";
-  $return.="  <title>".$GLOBALS['APP']->settings_array['title']."</title>\n";
+  $return.="  <title>".($this->title?$this->title." - ":null).$GLOBALS['APP']->settings_array['title']."</title>\n";
   $return.=" </head>\n";
-  $return.=" <body class=\"".$GLOBALS['APP']->settings_array['theme']."\">\n\n";
+  $return.=" <body class=\"".$this->theme."\">\n\n";
   $return.="  <center>\n\n";
   $return.="   <!-- dashboard -->\n";
-  $return.="   <div class=\"dashboard ".$GLOBALS['APP']->settings_array['theme']."\">\n\n";
+  $return.="   <div class=\"dashboard ".$this->orientation." ".$this->theme."\">\n\n";
   // cycle all sections
   foreach($this->tiles_array as $uid=>$tile_f){
    $return.="    <!-- tile_".$uid." -->\n";
-   $return.="    <div class=\"tile ".$GLOBALS['APP']->settings_array['theme']." w".$tile_f->width." h".$tile_f->height." ".$tile_f->classes."\" id=\"tile_".$uid."\">\n";
+   $return.="    <div class=\"tile ".$this->theme." w".$tile_f->width." h".$tile_f->height." ".$tile_f->classes."\" id=\"tile_".$uid."\">\n";
    $return.="     <div class=\"tile-title\">".$tile_f->title."</div>\n";
    $return.="     <div class=\"tile-content\"><canvas id=\"canvas_".$uid."\"></canvas></div>\n";
    $return.="    </div><!-- /tile_".$uid." -->\n\n";
@@ -76,6 +91,7 @@ class Dashboard{
   $return.="  <!-- external-scripts -->\n";
   $return.="  <script type=\"text/javascript\" src=\"".$GLOBALS['APP']->path."helpers/jquery-3.3.1/js/jquery.min.js\"></script>\n";
   $return.="  <script type=\"text/javascript\" src=\"".$GLOBALS['APP']->path."helpers/chartjs-2.7.3/js/chart.bundle.min.js\"></script>\n";
+  $return.="  <script type=\"text/javascript\" src=\"".$GLOBALS['APP']->path."helpers/jsurl-2.5.3/js/url.min.js\"></script>\n";
   $return.="  <!-- /external-scripts -->\n\n";
   $return.="  <!-- plugin-scripts -->\n";
   foreach($this->plugins_array as $plugin){$return.="  <script type=\"text/javascript\" src=\"".$GLOBALS['APP']->path."plugins/".$plugin."/script.js".(DEBUG?"?".api_random():null)."\"></script>\n";}

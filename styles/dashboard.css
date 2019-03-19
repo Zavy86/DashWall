@@ -15,6 +15,7 @@ body::-webkit-scrollbar{width:0 !important;}
 
 /* debug */
 .debug{
+ clear:left;
  margin:9px;
  padding:9px;
  background-color:#fefefe;
@@ -26,32 +27,31 @@ body::-webkit-scrollbar{width:0 !important;}
 /* themes */
 body.dark{background-color:#000000;color:#ffffff;}
 body.light{background-color:#ffffff;color:#000000;}
-.tile.dark{background-color:#222222;color:#f0f0f0;}
-.tile.light{background-color:#f0f0f0;color:#222222;}
+.tile.dark{background-color:#222222;color:#f9f9f9;}
+.tile.light{background-color:#f9f9f9;color:#222222;}
 
 /* disable text wrap */
 .nowrap{white-space:nowrap;}
 
-/* tile sizes */
-.w1{width:173px;}.h1{height:173px;}
-.w2{width:352px;}.h2{height:352px;}
-.w3{width:531px;}.h3{height:531px;}
-.w4{width:710px;}.h4{height:710px;}
-.w5{width:889px;}.h5{height:889px;}
-.w6{width:1068px;}.h6{height:1068px;}
-
 /* dashboard and tiles */
 .dashboard{
- width:1080px;
- margin-left:-6px;
  text-align:left;
  font-size:0;
 }
+.dashboard.portrait{
+ margin-left:-6px;
+ width:1080px;
+}
+.dashboard.landscape{
+ width:1920px;
+}
 .tile{
+ float:left;
  display:inline-block;
  margin:6px 0 0 6px;
  font-size:16px;
  overflow:hidden;
+    vertical-align: top;
 }
 .tile-title{
  padding:3px;
@@ -69,6 +69,22 @@ canvas{
  height:100%;
  /*border:1px solid white;*/
 }
+
+/* tile sizes portrait */
+.dashboard.portrait .w1{width:173px;}.dashboard.portrait .h1{height:153.5px;}
+.dashboard.portrait .w2{width:352px;}.dashboard.portrait .h2{height:313px;}
+.dashboard.portrait .w3{width:531px;}.dashboard.portrait .h3{height:472.5px;}
+.dashboard.portrait .w4{width:710px;}.dashboard.portrait .h4{height:632px;}
+.dashboard.portrait .w5{width:889px;}.dashboard.portrait .h5{height:791.5px;}
+.dashboard.portrait .w6{width:1068px;}.dashboard.portrait .h6{height:951px;}
+
+/* tile sizes landscape */
+.dashboard.landscape .w1{width:153.5px;}.h1{height:173px;}
+.dashboard.landscape .w2{width:313px;}.h2{height:352px;}
+.dashboard.landscape .w3{width:472.5px;}.h3{height:531px;}
+.dashboard.landscape .w4{width:632px;}.h4{height:710px;}
+.dashboard.landscape .w5{width:791.5px;}.h5{height:889px;}
+.dashboard.landscape .w6{width:951px;}.h6{height:1068px;}
 
 /* colors */
 .green-text{color:green;}
