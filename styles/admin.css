@@ -45,13 +45,14 @@ div.redirect a{color:#000000;text-decoration:none;}div.redirect a:hover{color:#0
 }
 
 /* description list */
-.dl-horizontal dt{
- width:165px;
- /*margin-right:30px;*/
- font-weight:normal;
-}
-.dl-horizontal dd{
- margin-left:195px;
+@media(min-width:768px){
+ .dl-horizontal dt{
+  width:165px;
+  font-weight:normal;
+ }
+ .dl-horizontal dd{
+  margin-left:195px;
+ }
 }
 
 /* forms */
@@ -103,6 +104,7 @@ li a.hidden-link{
 .btn-dashboard{
  width:142px;
  margin-right:18px;
+ margin-bottom:18px;
 }
 .btn-dashboard .fa{
  color:#666666;
