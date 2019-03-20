@@ -7,7 +7,7 @@
  */
 function dwp_trend(options){
  // debug
- console.log("trend: "+options.uid);
+ console.log("dwp_trend initialization: "+options.uid);
  console.log(options);
 
  /* initializations */
@@ -50,7 +50,7 @@ function dwp_trend(options){
  /* update function */
  function update(response){
   // debug
-  console.log("dwp_trend: "+options.uid);
+  console.log("dwp_trend refresh: "+options.uid);
   console.log(response);
   // build chart data
   chart_data={

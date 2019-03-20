@@ -7,7 +7,7 @@
  */
 function dwp_kpi(options){
 
- console.log("kpi: "+options.uid);
+ console.log("dw_kpi initialization: "+options.uid);
  console.log(options);
 
  /* get and resize canvas */
@@ -48,6 +48,10 @@ function dwp_kpi(options){
 
  /* update function */
  function update(response){
+  // debug
+  console.log("dwp_kpi refresh: "+options.uid);
+  console.log(response);
+
   var ctx=canvas.getContext('2d');
   ctx.fillStyle = options.color;
   ctx.clearRect(0,0,canvas.width,canvas.height)

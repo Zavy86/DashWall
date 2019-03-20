@@ -8,7 +8,7 @@
 
 function dwp_datetime(options){
 
- console.log("dwp_datetime: "+options.uid);
+ console.log("dwp_datetime initialization: "+options.uid);
  console.log(options);
 
  /* get and resize canvas */
@@ -46,6 +46,9 @@ function dwp_datetime(options){
 
  /* update function */
  function update(response){
+  // debug
+  console.log("dwp_datetime refresh: "+options.uid);
+  console.log(response);
 
   var ctx=canvas.getContext('2d');
   ctx.font = "32px Roboto";
