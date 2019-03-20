@@ -14,9 +14,9 @@
  // definitions
  $dashboard=null;
  // build dashboard buttons
- $dashboard.=str_repeat(" ",6).api_link("admin.php?mod=settings",api_icon("cog",null,"fa-4x")."<br><br>Settings","Dash|Wall Settings","btn btn-default btn-lg btn-dashboard")."\n";
- $dashboard.=str_repeat(" ",6).api_link("admin.php?mod=datasources",api_icon("database",null,"fa-4x")."<br><br>Datasources","Dash|Wall Datasources","btn btn-default btn-lg btn-dashboard")."\n";
  $dashboard.=str_repeat(" ",6).api_link("admin.php?mod=dashboards",api_icon("th",null,"fa-4x")."<br><br>Dashboards","Dash|Wall Dashboards","btn btn-default btn-lg btn-dashboard")."\n";
+ $dashboard.=str_repeat(" ",6).api_link("admin.php?mod=datasources",api_icon("database",null,"fa-4x")."<br><br>Datasources","Dash|Wall Datasources","btn btn-default btn-lg btn-dashboard")."\n";
+ $dashboard.=str_repeat(" ",6).api_link("admin.php?mod=settings",api_icon("cog",null,"fa-4x")."<br><br>Settings","Dash|Wall Settings","btn btn-default btn-lg btn-dashboard")."\n";
  // build grid
  $grid=new strGrid();
  // add grid row
