@@ -100,5 +100,11 @@ li a.hidden-link{
  text-decoration:line-through;
 }
 
-
+.btn-dashboard{
+ width:142px;
+ margin-right:18px;
+}
+.btn-dashboard .fa{
+ color:#666666;
+}
 

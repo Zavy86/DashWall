@@ -98,7 +98,7 @@ class strGrid{
    }
    $return.=$ind."</div><!-- /grid-row -->\n";
   }
-  if($container){$return.=substr($ind,0,-1)."</div><!-- /grid container -->\n\n";}
+  if($container){$return.=substr($ind,0,-1)."</div><!-- /grid container -->\n";}
   // return
   return $return;
  }
