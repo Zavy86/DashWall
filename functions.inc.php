@@ -70,6 +70,14 @@ function api_session_start(){
 }
 
 /**
+ * Check Authorizations
+ */
+function checkAuthorizations(){
+  if(!strpos($_SERVER['REQUEST_URI'],"/admin.php")){header("location: ../admin.php");}
+  /* @todo check authorization*/
+ }
+
+/**
  * Dump a variable into a debug box (only if debug is enabled)
  *
  * @param string $variable Dump variable
@@ -88,14 +96,55 @@ function api_dump($variable,$label=null,$class=null,$force=false){
 }
 
 /**
- * Redirect (if debug is enabled show a redirect link)
+ * Redirect
  *
  * @param string $location Location URL
  */
 function api_redirect($location){
- if(DEBUG){die("<a href=\"".$location."\">".$location."</a>");}
+ if(DEBUG){
+  echo "<div class='redirect'>".api_tag("strong","REDIRECT")."<br>".api_link($location,$location)."</div>";
+  echo "<link href=\"".$GLOBALS['APP']->path."styles/admin.css\" rel=\"stylesheet\">\n";
+  die();
+ }
  exit(header("location: ".$location));
 }
+
+/**
+ * Return Script
+ *
+ * @param string $default Default script
+ * @return string|boolean Return script defined or false
+ */
+function api_return_script($default){
+ if(!$default){return false;}
+ // get return script
+ $return=$_REQUEST['return_scr'];
+ // if not found return default
+ if(!$return){$return=$default;}
+ // return
+ return $return;
+}
+
+/**
+ * Alert
+ *
+ * @param string $message Alert message
+ * @param string $class Alert class [info|warning|error]
+ * @return boolean
+ */
+function api_alert($message,$class="info"){
+ // checks
+ if(!$message){return false;}
+ // build alert object
+ $alert=new stdClass();
+ $alert->timestamp=time();
+ $alert->message=$message;
+ $alert->class=$class;
+ $_SESSION['dashwall']['alerts'][]=$alert;
+ // return
+ return true;
+}
+
 
 /*
  * Random generator
@@ -151,6 +200,58 @@ function api_icon($icon,$title=null,$classes=null){
  $return="<i class=\"fa fa-".$icon." ".$classes."\"";
  if($title){$return.=" title=\"".$title."\"";}
  $return.="></i>";
+ return $return;
+}
+
+/**
+ * Link
+ * @param string $url URL
+ * @param string $label Label
+ * @param string $title Title
+ * @param string $class CSS class
+ * @param booelan $popup Show popup title
+ * @param string $confirm Show confirm alert box
+ * @param string $style Style tags
+ * @param string $tags Custom HTML tags
+ * @param string $target Target window
+ * @param string $id Link ID or random created
+ * @return string link
+ */
+function api_link($url,$label,$title=null,$class=null,$popup=false,$confirm=null,$style=null,$tags=null,$target="_self",$id=null){
+ if(!$url){return false;}
+ if(!$label){return false;}
+ if(!$id){$id=rand(1,99999);}
+ if(substr($url,0,1)=="?"){$url="index.php".$url;}
+ $return="<a id=\"link_".$id."\" href=\"".$url."\"";
+ if($class){$return.=" class=\"".$class."\"";}
+ if($style){$return.=" style=\"".$style."\"";}
+ if($title){
+  if($popup){$return.=" data-toggle=\"popover\" data-placement=\"top\" data-content=\"".$title."\"";}
+  else{$return.=" title=\"".$title."\"";}
+ }
+ if($confirm){$return.=" onClick=\"return confirm('".addslashes($confirm)."')\"";}
+ if($tags){$return.=" ".$tags;}
+ $return.=" target=\"".$target."\">".$label."</a>";
+ return $return;
+}
+
+/**
+ * Parse URL to standard class
+ *
+ * @param string $url URL to parse
+ * @return object Parsed
+ */
+function api_parse_url($url=null){
+ // check url
+ if(!$url){$url=(isset($_SERVER['HTTPS'])?"https":"http")."://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];}
+ // build object
+ $return=new stdClass();
+ // parse url string into object
+ foreach(parse_url($url) as $key=>$value){$return->$key=$value;}
+ // parse query to array
+ $return->query_array=array();
+ parse_str($return->query,$return->query_array);
+ // return
  return $return;
 }
 
