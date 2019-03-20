@@ -7,11 +7,11 @@
  */
 
 /* container */
-@media(min-width:768px){.container{width:750px;}}
+/*@media(min-width:768px){.container{width:750px;}}
 @media(min-width:992px){.container{width:970px;}}
 @media(min-width:1200px){.container{width:1170px;}}
 @media(min-width:1400px){.container{width:1370px;}}
-@media(min-width:1900px){.container{width:1870px;}}
+@media(min-width:1900px){.container{width:1870px;}}*/
 
 /* pre */
 pre.debug{margin:9px;padding:9px;font-size:9pt;}
@@ -72,6 +72,16 @@ form label{
  font-size:20px;
 }
 
+/* footer */
+.footer{
+ color:#999;
+ font-size:12px;
+}
+.footer a{
+ color:#333;
+ font-size:12px;
+ text-decoration:none;
+}
 
 
 .hidden-link{
