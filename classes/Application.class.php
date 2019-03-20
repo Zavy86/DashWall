@@ -48,6 +48,10 @@ class Application{
   * @param string $property Property name
   * @return type Property value
   */
- public function __get($property){return $this->$property;}
+ public function __get($property){
+  if(property_exists("Application",$property)){return $this->$property;}
+  elseif(array_key_exists($property,$this->settings_array)){return $this->settings_array[$property];}
+  else{return false;}
+ }
 
 }

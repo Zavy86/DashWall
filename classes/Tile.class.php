@@ -14,6 +14,7 @@ class Tile{
 
  /** Properties */
  protected $id;
+ protected $fkDashboard;
  protected $order;
  protected $width;
  protected $height;
@@ -29,14 +30,17 @@ class Tile{
  public function __construct($tile=null){
   // load object
   if(is_numeric($tile)){$tile=$GLOBALS['DB']->queryUniqueObject("SELECT * FROM `dashwall__tiles` WHERE `id`='".$tile."'");}
-  if(!$tile->id){die("Tile not found");}
+  if(!$tile->id){return false;}
   $this->id=(int)$tile->id;
+  $this->fkDashboard=(int)$tile->fkDashboard;
   $this->order=(int)$tile->order;
   $this->width=(int)$tile->width;
   $this->height=(int)$tile->height;
   $this->title=stripslashes($tile->title);
   $this->plugin=stripslashes($tile->plugin);
   $this->parameters_array=json_decode($tile->parameters,true);
+  // return
+  return $this->id;
  }
 
  /**

@@ -16,36 +16,37 @@ class Dashboard{
  protected $id;
  protected $code;
  protected $title;
- protected $theme;
  protected $orientation;
- protected $tiles_array;
+ protected $theme;
  protected $plugins_array;
+ protected $tiles_id_array;
 
  /**
   * Constructor
   */
- public function __construct($dashboard="default"){
+ public function __construct($dashboard){
   // load object
-  if(!strlen($dashboard)){$dashboard="default";}
   if(is_numeric($dashboard)){$dashboard=$GLOBALS['DB']->queryUniqueObject("SELECT * FROM `dashwall__dashboards` WHERE `id`='".$dashboard."'");}
   if(is_string($dashboard)){$dashboard=$GLOBALS['DB']->queryUniqueObject("SELECT * FROM `dashwall__dashboards` WHERE `code`='".$dashboard."'");}
-  if(!$dashboard->id){die("Dashboard not found");}
+  if(!$dashboard->id){return false;}
   // initialize properties
   $this->id=(int)$dashboard->id;
   $this->code=stripslashes($dashboard->code);
   $this->title=stripslashes($dashboard->title);
-  $this->theme=stripslashes($dashboard->theme);
   $this->orientation=stripslashes($dashboard->orientation);
-  $this->tiles_array=array();
+  $this->theme=stripslashes($dashboard->theme);
   $this->plugins_array=array();
+  $this->tiles_id_array=array();
   // get tiles
-  $tiles_results=$GLOBALS['DB']->queryObjects("SELECT * FROM `dashwall__tiles` WHERE `fkDashboard`='".$this->id."' ORDER BY `order` ASC");
+  $tiles_results=$GLOBALS['DB']->queryObjects("SELECT `id`,`plugin` FROM `dashwall__tiles` WHERE `fkDashboard`='".$this->id."' ORDER BY `order` ASC");
   foreach($tiles_results as $tile){
-   // load tile
-   $this->tiles_array[api_random()]=new Tile($tile);
-   // load plugin
+   // add tile id to array and generate random id
+   $this->tiles_id_array[$tile->id]=api_random();
+   // add plugin to array if not exist
    if(!array_key_exists($tile->plugin,$this->plugins_array)){$this->plugins_array[$tile->plugin]=$tile->plugin;}
   }
+  // return
+  return $this->id;
  }
 
  /**
@@ -55,6 +56,34 @@ class Dashboard{
   * @return type Property value
   */
  public function __get($property){return $this->$property;}
+
+ /**
+  * Get Tiles
+  */
+ public function getTiles(){
+  //definitions
+  $tiles_array=array();
+  // get tiles
+  $tiles_results=$GLOBALS['DB']->queryObjects("SELECT * FROM `dashwall__tiles` WHERE `fkDashboard`='".$this->id."' ORDER BY `order` ASC");
+  foreach($tiles_results as $tile){
+   // load tile
+   $tiles_array[$this->tiles_id_array[$tile->id]]=new Tile($tile);
+  }
+  // return
+  return $tiles_array;
+ }
+
+ /**
+  * Get Tile
+  */
+ public function getTile($tile){
+  // load tile
+  $tile_obj=new Tile($tile);
+  // check tile dashboard
+  if($tile_obj->fkDashboard!=$this->id){return false;}
+  // return
+  return $tile_obj;
+ }
 
  /**
   * Renderize Dashboard
@@ -78,7 +107,7 @@ class Dashboard{
   $return.="   <!-- dashboard -->\n";
   $return.="   <div class=\"dashboard ".$this->orientation." ".$this->theme."\">\n\n";
   // cycle all sections
-  foreach($this->tiles_array as $uid=>$tile_f){
+  foreach($this->getTiles() as $uid=>$tile_f){
    $return.="    <!-- tile_".$uid." -->\n";
    $return.="    <div class=\"tile ".$this->theme." w".$tile_f->width." h".$tile_f->height." ".$tile_f->classes."\" id=\"tile_".$uid."\">\n";
    $return.="     <div class=\"tile-title\">".$tile_f->title."</div>\n";
@@ -99,7 +128,7 @@ class Dashboard{
   $return.="  <!-- /tile-scripts -->\n";
   $return.="  <script type=\"text/javascript\">\n";
   $return.="  $(document).ready(function(){\n";
-  foreach($this->tiles_array as $uid=>$tile_f){$return.="   var tile_".$uid."=new ".$tile_f->plugin."(".json_encode(array_merge(array("uid"=>$uid),$tile_f->parameters_array)).");\n";}
+  foreach($this->getTiles() as $uid=>$tile_f){$return.="   var tile_".$uid."=new ".$tile_f->plugin."(".json_encode(array_merge(array("uid"=>$uid),$tile_f->parameters_array)).");\n";}
   $return.="  });\n";
   $return.="  </script><!-- /tile-scripts -->\n\n";
   // renderize closures

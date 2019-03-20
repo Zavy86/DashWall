@@ -223,7 +223,7 @@ class Database{
   try{
    $query=$this->connection->query($sql);
    $this->logs_array[]=array("warn","PDO queryDelete: ".$query->rowCount()." rows deleted");
-   return true;
+   $return=true;
   }catch(PDOException $e){
    $this->logs_array[]=array("error","PDO queryDelete: ".$e->getMessage());
    $return=false;
