@@ -1,0 +1,94 @@
+/**
+ * Administration
+ *
+ * @package DashWall\Styles
+ * @author  Manuel Zavatta <manuel.zavatta@gmail.com>
+ * @link    https://github.com/Zavy86/dashwall
+ */
+
+/* container */
+@media(min-width:768px){.container{width:750px;}}
+@media(min-width:992px){.container{width:970px;}}
+@media(min-width:1200px){.container{width:1170px;}}
+@media(min-width:1400px){.container{width:1370px;}}
+@media(min-width:1900px){.container{width:1870px;}}
+
+/* pre */
+pre.debug{margin:9px;padding:9px;font-size:9pt;}
+pre.warn{background-color:#FCF8E3;border-color:#FAEBCC;}
+pre.error{background-color:#F2DEDE;border-color:#EBCCD1;}
+
+/* redirects */
+div.redirect{margin:9px;padding:18px 9px 18px 9px;font-size:9pt;font-family:monospace;background-color:#D9EDF7;border-color:#BCE8F1;}
+div.redirect a{color:#000000;text-decoration:none;}div.redirect a:hover{color:#000000;text-decoration:underline;}
+
+
+/* disable text wrap */
+.nowrap{white-space:nowrap;}
+
+
+/* tables */
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th{
+ font-size:11px;
+ text-transform:uppercase;
+ border-bottom:0;
+}
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+ font-size:14px;
+}
+.table tr.deleted td{
+ text-decoration:line-through;
+}
+
+/* description list */
+.dl-horizontal dt{
+ width:165px;
+ /*margin-right:30px;*/
+ font-weight:normal;
+}
+.dl-horizontal dd{
+ margin-left:195px;
+}
+
+/* forms */
+form label{
+ overflow:hidden;
+ white-space:nowrap;
+ text-overflow:ellipsis;
+}
+.control-label{
+ font-weight:normal;
+}
+
+/* nav */
+.nav-tabs li.title,.nav-pills li.title{
+ padding:12px;
+ margin-right:2px;
+ line-height:18px;
+ font-size:20px;
+}
+
+
+
+.hidden-link{
+ color:#333;
+}
+
+a.hidden-link{
+ text-decoration:none;
+}
+
+li a.hidden-link{
+ color:#666;
+}
+
+.text-deleted{
+ text-decoration:line-through;
+}
+
+
+
