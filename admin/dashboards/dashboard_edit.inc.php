@@ -25,7 +25,7 @@
  $form->addFieldOption("light","Light");
  $form->addFieldOption("dark","Dark");
  $form->addControl("submit","Submit");
- $form->addControl("button","Cancel","admin.php?mod=".MODULE."&scr=".api_return_script("dashboard_view"),null,null,null,"data-dismiss='modal'");
+ $form->addControl("button","Cancel","admin.php?mod=".MODULE."&scr=".api_return_script("dashboard_view")."&idDashboard=".$dashboard_obj->id,null,null,null,"data-dismiss='modal'");
  $form->addControl("button","Remove","admin.php?mod=".MODULE."&scr=submit&act=dashboard_remove&idDashboard=".$dashboard_obj->id,"btn-danger","Are you sure you want to remove definitively this dashboard?");
  // build grid
  $grid=new strGrid();

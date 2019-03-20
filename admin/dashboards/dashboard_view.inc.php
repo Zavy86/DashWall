@@ -55,8 +55,8 @@
  // add grid row
  $grid->addRow();
  // renderize description list into grid
- $grid->addCol($dl->render(6),"col-xs-5");
+ $grid->addCol($dl->render(6),"col-xs-12 col-md-5");
  // renderize table into grid
- $grid->addCol($table->render(6),"col-xs-7");
+ $grid->addCol($table->render(6),"col-xs-12 col-md-7");
  // renderize grid into bootstrap sections
  $bootstrap->addSection($grid->render(true,3));
