@@ -13,23 +13,63 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `framework__settings`
+-- Table structure for table `dashwall__datasources`
 --
 
-CREATE TABLE IF NOT EXISTS `dashwall__settings` (
-  `setting` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `value` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`setting`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `dashwall__datasources` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `code` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `connector` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `hostname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `database` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `username` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tns` text COLLATE utf8_unicode_ci,
+  `queries` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `framework__settings`
+-- Table structure for table `dashwall__schedules`
 --
 
-INSERT INTO `dashwall__settings` (`setting`, `value`) VALUES
-('title', 'Dash|Wall'),
-('owner', 'Owner name'),
-('theme', 'dark');
+CREATE TABLE IF NOT EXISTS `dashwall__schedules` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `minutes` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `hours` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `plugin` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `parameters` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+
+--
+-- Table structure for table `dashwall__dashboards`
+--
+
+CREATE TABLE IF NOT EXISTS `dashwall__dashboards` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `code` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `title` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `orientation` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `theme` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT 'light, dark',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `dashwall__dashboards`
+--
+
+INSERT INTO `dashwall__dashboards` (`id`, `code`, `title`, `orientation`, `theme`) VALUES
+(1, 'default', 'Dashboard', 'landscape', 'dark');
 
 -- --------------------------------------------------------
 
@@ -39,21 +79,35 @@ INSERT INTO `dashwall__settings` (`setting`, `value`) VALUES
 
 CREATE TABLE IF NOT EXISTS `dashwall__tiles` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `fkDashboard` int(11) unsigned NOT NULL,
   `order` tinyint(3) unsigned NOT NULL,
   `width` tinyint(1) unsigned NOT NULL,
   `height` tinyint(1) unsigned NOT NULL,
-  `title` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `plugin` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `parameters` text COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `fkDashboard` (`fkDashboard`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `dashwall__tiles`
 --
 
-INSERT INTO `dashwall__tiles` (`id`, `order`, `width`, `height`, `title`, `plugin`, `parameters`) VALUES
-(1, 1, 1, 1, 'TIMESTAMP', 'dwp_datetime', '{"refresh":"1000","format":"H:i:s"}');
+INSERT INTO `dashwall__tiles` (`id`, `fkDashboard`, `order`, `width`, `height`, `title`, `plugin`, `parameters`) VALUES
+(1, 1, 1, 1, 1, 'TIMESTAMP', 'dwp_datetime', '{"refresh":"1000","format":"H:i:s","color":"#ffffff"}');
+
+-- --------------------------------------------------------
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `dashwall__tiles`
+--
+ALTER TABLE `dashwall__tiles`
+  ADD CONSTRAINT `dashwall__tiles_ibfk_1` FOREIGN KEY (`fkDashboard`) REFERENCES `dashwall__dashboards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- --------------------------------------------------------
 
