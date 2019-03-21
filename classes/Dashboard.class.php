@@ -100,7 +100,7 @@ class Dashboard{
   $return.="  <link type=\"text/css\" rel=\"stylesheet\" href=\"".$GLOBALS['APP']->path."styles/dashboard.css".(DEBUG?"?".api_random():null)."\" media=\"screen,projection\"/>\n";
   $return.="  <link type=\"image/png\" rel=\"icon\" href=\"".$GLOBALS['APP']->path."styles/favicon.png\" sizes=\"any\"/>\n";
   $return.="  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\"/>\n";
-  $return.="  <title>".($this->title?$this->title." - ":null).$GLOBALS['APP']->settings_array['title']."</title>\n";
+  $return.="  <title>".($this->title?$this->title." - ":null)."Dash|Wall</title>\n";
   $return.=" </head>\n";
   $return.=" <body class=\"".$this->theme."\">\n\n";
   $return.="  <center>\n\n";

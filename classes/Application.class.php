@@ -20,7 +20,6 @@ class Application{
  protected $url;
  protected $dir;
  protected $db;
- protected $settings_array;
 
  /**
   * Constructor
@@ -38,10 +37,6 @@ class Application{
   $this->url=URL;
   $this->dir=DIR;
   $this->db=$configuration->db_name;
-  $this->settings_array=array();
-  // load settings
-  $settings_results=$GLOBALS['DB']->queryObjects("SELECT * FROM `dashwall__settings` ORDER BY `setting` ASC");
-  foreach($settings_results as $setting){$this->settings_array[$setting->setting]=$setting->value;}
  }
 
  /**
@@ -50,10 +45,6 @@ class Application{
   * @param string $property Property name
   * @return type Property value
   */
- public function __get($property){
-  if(property_exists("Application",$property)){return $this->$property;}
-  elseif(array_key_exists($property,$this->settings_array)){return $this->settings_array[$property];}
-  else{return false;}
- }
+ public function __get($property){return $this->$property;}
 
 }

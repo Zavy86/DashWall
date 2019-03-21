@@ -23,14 +23,15 @@
  // build bootstrap structure
  $bootstrap=new strBootstrap($APP->path);
  // build navbar
- $navbar=new strNavbar($APP->title);
+ $navbar=new strNavbar("Dash|Wall");
  $navbar->addNav();
  $navbar->addElement("Administration","admin.php?mod=administration");
  $navbar->addElement("Dashboards","admin.php?mod=dashboards");
  $navbar->addElement("Datasets","admin.php?mod=datasets");
  $navbar->addElement("Datasources","admin.php?mod=datasources");
  $navbar->addElement("Schedules","admin.php?mod=schedules");
- $navbar->addElement("Settings","admin.php?mod=settings");
+ $navbar->addNav("navbar-right");                                                                                  /** todo right */
+ $navbar->addElement(api_icon("lock","Lock"),"admin.php?mod=authentication&scr=submit&act=logout");
  // add navbar to bootstrap
  $bootstrap->addSection($navbar->render(3));
  // check and import script

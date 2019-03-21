@@ -136,7 +136,7 @@ class strBootstrap{
   $return.="  <link type=\"image/png\" rel=\"icon\" href=\"".$GLOBALS['APP']->path."styles/favicon.png\" sizes=\"any\"/>\n";
   $return.="  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\"/>\n";
 
-  $return.="  <title>".($this->title?$this->title." - ":null).$GLOBALS['APP']->title."</title>\n";
+  $return.="  <title>".($this->title?$this->title." - ":null)."Dash|Wall</title>\n";
   $return.=" </head>\n";
   $return.=" <body>\n";
 
@@ -172,7 +172,7 @@ class strBootstrap{
   $return.="</script><!-- /internal-scripts -->\n\n";
 
   $return.="  <!-- /scripts -->\n";
-  
+
   // cycle all alerts
   if(is_array($_SESSION['dashwall']['alerts']) && count($_SESSION['dashwall']['alerts'])){
    $return.="  <!-- alerts -->\n";
