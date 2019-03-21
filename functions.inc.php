@@ -23,7 +23,7 @@ if(isset($_GET['debug'])){
 error_reporting(E_ALL & ~E_NOTICE);
 ini_set("display_errors",$debug);
 
-// check for configuration file                                         @todo setup!
+// check for configuration file                                        /** @todo setup!
 if(!file_exists(realpath(dirname(__FILE__))."/config.inc.php")){die("Dash|Wall is not configured..<br><br>Launch <a href='setup.php'>Setup</a> script!");}
 
 // include configuration file
@@ -64,7 +64,10 @@ function api_session_start(){
  // start php session
  session_start();
  // check for application session array
- if(!is_array($_SESSION['dashwall'])){$_SESSION['dashwall']=array();}
+ if(!is_array($_SESSION['dashwall'])){
+  $_SESSION['dashwall']=array();
+  $_SESSION['dashwall']['authenticated']=false;
+ }
  // check for application session alerts array
  if(!is_array($_SESSION['dashwall']['alerts'])){$_SESSION['dashwall']['alerts']=array();}
 }
@@ -74,7 +77,11 @@ function api_session_start(){
  */
 function checkAuthorizations(){
   if(!strpos($_SERVER['REQUEST_URI'],"/admin.php")){header("location: ../admin.php");}
-  /* @todo check authorization*/
+  if(!$_SESSION['dashwall']['authenticated']){
+   // alert and redirect
+   api_alert("Authentication expired","warning");
+   api_redirect($GLOBALS['APP']->path."admin.php?mod=authentication");
+  }
  }
 
 /**
