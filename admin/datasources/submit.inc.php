@@ -79,7 +79,7 @@
   if(count($results)){api_alert("Datasource test successful","success");}
   else{api_alert("Datasource test failed","warning");}
   // redirect
-  api_redirect("admin.php?mod=".MODULE."&scr=datasource_view&idDatasource=".$datasource_obj->id);
+  api_redirect("admin.php?mod=".MODULE."&scr=".api_return_script("datasource_view")."&idDatasource=".$datasource_obj->id);
  }
 
 

@@ -38,7 +38,7 @@ EOS;
  foreach($results as $result_f){
   // add table datas
   $table->addRow();
-  $table->addRowField(api_link("admin.php?mod=datasets&scr=dataset_view&dataset=".$result_f->name,api_icon("search"),"View dataset","hidden-link"),"nowrap");
+  $table->addRowFieldAction("admin.php?mod=datasets&scr=dataset_view&dataset=".$result_f->name,api_icon("search","View dataset"));
   $table->addRowField($result_f->name,"nowrap");
   $table->addRowField("~".number_format($result_f->rows,0,",","."),"nowrap text-right");
   $table->addRowField("~".number_format($result_f->size,2,",",".")." MB","nowrap text-right");

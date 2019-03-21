@@ -26,11 +26,12 @@
   // build operation button
   $ob=new strOperationsButton();
   $ob->addElement("admin.php?mod=datasources&scr=datasource_edit&idDatasource=".$datasource_fobj->id."&return_scr=datasource_list","fa-pencil","Edit this datasource");
+  $ob->addElement("admin.php?mod=datasources&scr=submit&act=datasource_test&idDatasource=".$datasource_fobj->id."&return_scr=datasource_list","fa-check","Test this datasource");
   // check selected
   if($datasource_fobj->id==$_REQUEST['idDatasource']){$tr_class="info";}else{$tr_class=null;}
   // add table datas
   $table->addRow($tr_class);
-  $table->addRowField(api_link("admin.php?mod=datasources&scr=datasource_view&idDatasource=".$datasource_fobj->id,api_icon("search"),"View datasource","hidden-link"),"nowrap");
+  $table->addRowFieldAction("admin.php?mod=datasources&scr=datasource_view&idDatasource=".$datasource_fobj->id,api_icon("search","View datasource"));
   $table->addRowField(api_tag("samp",$datasource_fobj->code),"nowrap");
   $table->addRowField($datasource_fobj->description);
   $table->addRowField($ob->render(11),"nowrap text-right");
