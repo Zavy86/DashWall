@@ -52,7 +52,7 @@
   if($selected_tile_obj->id){
    $parameters=$selected_tile_obj->parameters_array;
    unset($parameters['refresh']);
-   $parameters_text=json_encode($parameters,JSON_PRETTY_PRINT);
+   $parameters_text=stripslashes(json_encode($parameters,JSON_PRETTY_PRINT));
   }
   $tile_form->addField("textarea","parameters","Parameters",$parameters_text,"Parameters in JSON format\n{\n    ''parameter'':''value''\n}",null,null,"font-family:monospace","rows=4");
   // controls

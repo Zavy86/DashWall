@@ -33,7 +33,7 @@ class Schedule{
   $this->minutes=stripslashes($schedule->minutes);
   $this->hours=stripslashes($schedule->hours);
   $this->plugin=stripslashes($schedule->plugin);
-  $this->parameters_array=json_decode($schedule->parameters,true);
+  $this->parameters_array=json_decode(stripslashes($schedule->parameters),true);
   // return
   return $this->id;
  }

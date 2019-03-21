@@ -38,7 +38,7 @@ class Tile{
   $this->height=(int)$tile->height;
   $this->title=stripslashes($tile->title);
   $this->plugin=stripslashes($tile->plugin);
-  $this->parameters_array=json_decode($tile->parameters,true);
+  $this->parameters_array=json_decode(stripslashes($tile->parameters),true);
   // return
   return $this->id;
  }

@@ -38,7 +38,7 @@
   $form->addFieldOption($plugin_f,$plugin_f);
  }
  // convert parameters to json
- if(count($schedule_obj->parameters_array)){$parameters_text=json_encode($schedule_obj->parameters_array,JSON_PRETTY_PRINT);}
+ if(count($schedule_obj->parameters_array)){$parameters_text=stripslashes(json_encode($schedule_obj->parameters_array,JSON_PRETTY_PRINT));}
  $form->addField("textarea","parameters","Parameters",$parameters_text,"Parameters in JSON format\n{\n    ''parameter'':''value''\n}",null,null,"font-family:monospace","rows=4");
  $form->addControl("submit","Submit");
  $form->addControl("button","Cancel","admin.php?mod=".MODULE."&scr=schedule_list&idSchedule=".$schedule_obj->id);
