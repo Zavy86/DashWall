@@ -18,7 +18,7 @@
  $form=new strForm("admin.php?mod=".MODULE."&scr=submit&act=datasource_save&idDatasource=".$datasource_obj->id."&return_scr=".api_return_script("datasource_view"),"POST",null,"datasource_edit");
  $form->addField("text","code","Code",$datasource_obj->code,"Datasource code",null,null,null,"required");
  $form->addField("text","description","Datasource",$datasource_obj->description,"Datasource description",null,null,null,"required");
- $form->addField("text","hostname","Hostname",$datasource_obj->hostname,"Database hostname or IP address",null,null,null,"required");
+ $form->addField("text","hostname","Hostname",$datasource_obj->hostname,"Database hostname or IP address");
  $form->addField("select","connector","Connector",$datasource_obj->connector,"Select a connector..",null,null,null,"required");
  $form->addFieldOption("mysql","MySQL");
  $form->addFieldOption("oci","Oracle Call Interface");
