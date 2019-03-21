@@ -19,7 +19,7 @@
  define('URL',HOST.PATH);
  define('DIR',ROOT.PATH);
  // die if configuration already exist
- //if(file_exists(DIR."config.inc.php")){die("Dash|Wall is already configured..");}
+ if(file_exists(DIR."config.inc.php")){die("Dash|Wall is already configured..");}
  // include bootstrap structures
  require_once(DIR."structures/strBootstrap.class.php");
  // globals variables
