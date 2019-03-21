@@ -15,6 +15,7 @@ class Datasource{
  /** Properties */
  protected $id;
  protected $code;
+ protected $description;
  protected $connector;
  protected $hostname;
  protected $database;
@@ -30,10 +31,11 @@ class Datasource{
   // load object
   if(is_numeric($datasource)){$datasource=$GLOBALS['DB']->queryUniqueObject("SELECT * FROM `dashwall__datasources` WHERE `id`='".$datasource."'");}
   if(is_string($datasource)){$datasource=$GLOBALS['DB']->queryUniqueObject("SELECT * FROM `dashwall__datasources` WHERE `code`='".$datasource."'");}
-  if(!$datasource->id){die("Datasource not found");}
+  if(!$datasource->id){return false;}
   // initialize properties
   $this->id=(int)$datasource->id;
   $this->code=stripslashes($datasource->code);
+  $this->description=stripslashes($datasource->description);
   $this->connector=stripslashes($datasource->connector);
   $this->hostname=stripslashes($datasource->hostname);
   $this->database=stripslashes($datasource->database);
@@ -41,6 +43,8 @@ class Datasource{
   $this->password=stripslashes($datasource->password);
   $this->tns=stripslashes($datasource->tns);
   $this->queries=stripslashes($datasource->queries);
+  // return
+  return $this->id;
  }
 
  /**
@@ -63,7 +67,7 @@ class Datasource{
    // make pdo dns
    switch($this->connector){
     case "oci":$pdo_dsn="oci:dbname=".$this->tns;break;
-    default:$pdo_dsn=$this->connector.":host=".$this->host.";dbname=".$this->database;
+    default:$pdo_dsn=$this->connector.":host=".$this->hostname.";dbname=".$this->database;
    }
    // build pdo object
    $pdo_db=new PDO($pdo_dsn,$this->username,$this->password);
