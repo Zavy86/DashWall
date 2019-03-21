@@ -38,7 +38,7 @@
   $tile_form->addFieldOption("43200000","12 hour");
   $tile_form->addFieldOption("86400000","1 day");
   // plugins
-  $tile_form->addField("select","plugin","Plugin",$selected_tile_obj->plugin,"Select a plugin",null,null,null,"required");
+  $tile_form->addField("select","plugin","Plugin",$selected_tile_obj->plugin,"Select a plugin..",null,null,null,"required");
   // scan plugin directory
   $plugins=scandir($APP->dir."plugins");
   // cycle all elements
