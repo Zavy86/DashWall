@@ -26,8 +26,10 @@
   // build operation button
   $ob=new strOperationsButton();
   $ob->addElement("admin.php?mod=dashboards&scr=dashboard_edit&idDashboard=".$dashboard_fobj->id."&return_scr=dashboard_list","fa-pencil","Edit this dashboard");
+  // check selected
+  if($dashboard_fobj->id==$_REQUEST['idDashboard']){$tr_class="info";}else{$tr_class=null;}
   // add table datas
-  $table->addRow();
+  $table->addRow($tr_class);
   $table->addRowField(api_link("admin.php?mod=dashboards&scr=dashboard_view&idDashboard=".$dashboard_fobj->id,api_icon("search"),"View dashboard","hidden-link"),"nowrap");
   $table->addRowField(api_tag("samp",$dashboard_fobj->code),"nowrap");
   $table->addRowField($dashboard_fobj->title);

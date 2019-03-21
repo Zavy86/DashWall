@@ -14,9 +14,6 @@
  require_once("template.inc.php");
  // set title
  $bootstrap->setTitle("Datasource ".strtoupper($datasource_obj->code));
- // definitions
- $order_check=1;
- $order_problems=false;
  // build description list
  $dl_left=new strDescriptionList("br","dl-horizontal");
  $dl_left->addElement("Code",api_tag("samp",$datasource_obj->code));
@@ -34,7 +31,7 @@
  $grid=new strGrid();
  // add grid row
  $grid->addRow();
- // renderize description list into grid
+ // renderize description lists into grid
  $grid->addCol($dl_left->render(6),"col-xs-12 col-md-4");
  $grid->addCol($dl_right->render(6),"col-xs-12 col-md-8");
  // renderize grid into bootstrap sections

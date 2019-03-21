@@ -19,6 +19,7 @@ class Application{
  protected $root;
  protected $url;
  protected $dir;
+ protected $db;
  protected $settings_array;
 
  /**
@@ -36,6 +37,7 @@ class Application{
   $this->root=ROOT;
   $this->url=URL;
   $this->dir=DIR;
+  $this->db=$configuration->db_name;
   $this->settings_array=array();
   // load settings
   $settings_results=$GLOBALS['DB']->queryObjects("SELECT * FROM `dashwall__settings` ORDER BY `setting` ASC");
