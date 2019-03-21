@@ -4,6 +4,7 @@
  // database parameters
  $configuration->db_type="mysql";
  $configuration->db_host="localhost";
+ $configuration->db_port="3306";
  $configuration->db_name="dashwall";
  $configuration->db_user="username";
  $configuration->db_pass="password";
