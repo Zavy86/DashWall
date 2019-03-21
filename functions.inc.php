@@ -26,13 +26,13 @@ function api_session_start(){
  * Check Authorizations
  */
 function checkAuthorizations(){
-  if(!strpos($_SERVER['REQUEST_URI'],"admin.php")){header("location: ../admin.php");}
-  if(!$_SESSION['dashwall']['authenticated']){
-   // alert and redirect
-   api_alert("Authentication expired","warning");
-   api_redirect($GLOBALS['APP']->path."admin.php?mod=authentication");
-  }
+ if(!strpos($_SERVER['REQUEST_URI'],"admin.php")){api_redirect($GLOBALS['APP']->path."admin.php");}
+ if(!$_SESSION['dashwall']['authenticated']){
+  // alert and redirect
+  api_alert("Authentication expired","warning");
+  api_redirect($GLOBALS['APP']->path."admin.php?mod=authentication");
  }
+}
 
 /**
  * Dump a variable into a debug box (only if debug is enabled)
