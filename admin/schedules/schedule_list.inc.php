@@ -35,8 +35,14 @@
   $table->addRowField($schedule_fobj->hours,"nowrap text-right");
   $table->addRowField($schedule_fobj->minutes,"nowrap text-right");
  }
+ // make alert
+ $alert=api_tag("div","Sample crontab script: <samp>*  *  *  *  *  wget \"".$APP->url."cron.php\" -qO- | cat /dev/null</samp>","alert alert-info");
  // build grid
  $grid=new strGrid();
+ // add grid row
+ $grid->addRow();
+ // renderize alert into grid
+ $grid->addCol($alert,"col-xs-12");
  // add grid row
  $grid->addRow();
  // renderize table into grid
