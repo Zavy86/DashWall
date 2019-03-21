@@ -27,7 +27,9 @@
  $navbar->addNav();
  $navbar->addElement("Administration","admin.php?mod=administration");
  $navbar->addElement("Dashboards","admin.php?mod=dashboards");
+ $navbar->addElement("Datasets","admin.php?mod=datasets");
  $navbar->addElement("Datasources","admin.php?mod=datasources");
+ $navbar->addElement("Schedules","admin.php?mod=schedules");
  $navbar->addElement("Settings","admin.php?mod=settings");
  // add navbar to bootstrap
  $bootstrap->addSection($navbar->render(3));

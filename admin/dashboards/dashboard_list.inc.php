@@ -16,7 +16,7 @@
  // add table headers
  $table->addHeader("&nbsp;");
  $table->addHeader("Code","nowrap");
- $table->addHeader("Title",null,"100%");
+ $table->addHeader("Dashboard",null,"100%");
  // get dashboards
  $dashboards_array=array();
  $results=$GLOBALS['DB']->queryObjects("SELECT * FROM `dashwall__dashboards` ORDER BY `code` ASC");
