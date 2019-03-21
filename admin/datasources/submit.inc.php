@@ -59,7 +59,7 @@
   api_redirect("admin.php?mod=".MODULE."&scr=".api_return_script("datasource_view")."&idDatasource=".$datasource_qobj->id);
  }
 
-  /**
+ /**
   * Datasource Test
   */
  function datasource_test(){
@@ -83,7 +83,7 @@
  }
 
 
-  /**
+ /**
   * Datasource Remove
   */
  function datasource_remove(){

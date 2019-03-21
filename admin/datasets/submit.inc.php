@@ -68,7 +68,7 @@ EOS;
   api_redirect("admin.php?mod=".MODULE."&scr=".api_return_script("dataset_view")."&dataset=".$r_dataset."&id=".$dataset_qobj->id);
  }
 
-  /**
+ /**
   * Dataset Remove
   */
  function dataset_remove(){

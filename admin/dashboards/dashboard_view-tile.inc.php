@@ -54,7 +54,7 @@
    unset($parameters['refresh']);
    $parameters_text=json_encode($parameters,JSON_PRETTY_PRINT);
   }
-  $tile_form->addField("textarea","parameters","Parameters",$parameters_text,"Parameters in JSON format\n{\n    ''parameter'':''value''\n}",null,null,null,"rows=4");
+  $tile_form->addField("textarea","parameters","Parameters",$parameters_text,"Parameters in JSON format\n{\n    ''parameter'':''value''\n}",null,null,"font-family:monospace","rows=4");
   // controls
   $tile_form->addControl("submit","Submit");
   $tile_form->addControl("button","Cancel","#",null,null,null,"data-dismiss='modal'");

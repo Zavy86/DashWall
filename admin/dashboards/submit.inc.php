@@ -65,7 +65,7 @@
   api_redirect("admin.php?mod=".MODULE."&scr=".api_return_script("dashboard_view")."&idDashboard=".$dashboard_qobj->id);
  }
 
-  /**
+ /**
   * Dashboard Remove
   */
  function dashboard_remove(){
