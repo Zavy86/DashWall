@@ -26,7 +26,7 @@ function api_session_start(){
  * Check Authorizations
  */
 function checkAuthorizations(){
-  if(!strpos($_SERVER['REQUEST_URI'],"/admin.php")){header("location: ../admin.php");}
+  if(!strpos($_SERVER['REQUEST_URI'],"admin.php")){header("location: ../admin.php");}
   if(!$_SESSION['dashwall']['authenticated']){
    // alert and redirect
    api_alert("Authentication expired","warning");
