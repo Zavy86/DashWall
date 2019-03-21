@@ -13,7 +13,7 @@
   case "logout":authentication_logout();break;
   // default
   default:
-   api_alert("Submit function for action \"".ACTION."\" was not found in module \"".MODULE."\"..","danger");
+   api_alert("Submit function for action <em>".ACTION."</em> was not found in module <em>".MODULE."</em>..","danger");
    api_redirect("admin.php?mod=".MODULE);
  }
 

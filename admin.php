@@ -34,8 +34,8 @@
  // add navbar to bootstrap
  $bootstrap->addSection($navbar->render(3));
  // check and import script
- if(!is_dir($APP->dir."admin/".MODULE)){api_alert("Module \"".MODULE."\" was not found..","danger");api_redirect($APP->path."admin.php");}
- if(!file_exists($APP->dir."admin/".MODULE."/".SCRIPT.".inc.php")){api_alert("Script \"".SCRIPT."\" was not found in module \"".MODULE."\"..","danger");}
+ if(!is_dir($APP->dir."admin/".MODULE)){api_alert("Module <em>".MODULE."</em> was not found..","danger");api_redirect($APP->path."admin.php");}
+ if(!file_exists($APP->dir."admin/".MODULE."/".SCRIPT.".inc.php")){api_alert("Script <em>".SCRIPT."</em> was not found in module <em>".MODULE."</em>..","danger");}
  else{require_once($APP->dir."admin/".MODULE."/".SCRIPT.".inc.php");}
  // build footer grid
  $footer_grid=new strGrid();
