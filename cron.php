@@ -6,8 +6,8 @@
  * @author  Manuel Zavatta <manuel.zavatta@gmail.com>
  * @link    https://github.com/Zavy86/dashwall
  */
- // include functions
- require_once("functions.inc.php");
+ // load application
+ require_once("loader.inc.php");
  // check for cron timestamp
  function check_cron($schedule_obj){
   if($schedule_obj->hours=="*" && $schedule_obj->minutes=="*"){return true;}

@@ -6,10 +6,10 @@
  * @author  Manuel Zavatta <manuel.zavatta@gmail.com>
  * @link    https://github.com/Zavy86/dashwall
  */
- // include functions
- require_once("functions.inc.php");
+ // load application
+ require_once("loader.inc.php");
  // include bootstrap structures
- require_once(DIR."structures/strBootstrap.class.php");
+ require_once($APP->dir."structures/strBootstrap.class.php");
  // acquire variables
  $r_script=$_REQUEST['scr'];
  $r_module=$_REQUEST['mod'];
