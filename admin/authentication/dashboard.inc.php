@@ -12,7 +12,7 @@
  $bootstrap->setTitle("Authentication");
  // build form
  $form=new strForm("admin.php?mod=".MODULE."&scr=submit&act=login","POST",null,"authentication");
- $form->addField("password","password","Authentication",null,"Administration password",null,null,null,"required autofocus");
+ $form->addField("password","password","Authentication",null,"Insert the authentication code..",null,null,null,"required autofocus");
  $form->addFieldAddonButton("#","Submit","btn-primary",false,"onClick=\"document.getElementById('form_authentication').submit();\"");
  // build grid
  $grid=new strGrid();
