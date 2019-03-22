@@ -19,7 +19,7 @@
  define('URL',HOST.PATH);
  define('DIR',ROOT.PATH);
  // die if configuration already exist
- //if(file_exists(DIR."config.inc.php")){die("Dash|Wall is already configured..");}
+ if(file_exists(DIR."config.inc.php")){die("Dash|Wall is already configured..");}
  // include bootstrap structures
  require_once(DIR."structures/strBootstrap.class.php");
  // globals variables
@@ -143,7 +143,7 @@
   $file_content.=" \$configuration->db_user=\"".$_REQUEST['db_user']."\";\n";
   $file_content.=" \$configuration->db_pass=\"".$_REQUEST['db_pass']."\";\n";
   $file_content.=" // authentication\n";
-  $file_content.=" \$configuration->authentication=\"".$_REQUEST['authentication']."\";\n";
+  $file_content.=" \$configuration->authentication=\"".md5($_REQUEST['authentication'])."\";\n";
   $file_content.="?>";
   // write configuration file
   file_put_contents(DIR."config.inc.php",$file_content);

@@ -44,7 +44,7 @@
   // cycle all elements
   foreach($plugins as $plugin_f){
    // skip versioning and files
-   if(in_array($plugin_f,array(".","..","index"))){continue;}
+   if(in_array($plugin_f,array(".","..","index.php"))){continue;}
    if(!is_dir($APP->dir."plugins/".$plugin_f)){continue;}
    $tile_form->addFieldOption($plugin_f,$plugin_f);
   }

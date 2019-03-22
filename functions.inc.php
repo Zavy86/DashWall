@@ -26,13 +26,13 @@ function api_session_start(){
  * Check Authorizations
  */
 function checkAuthorizations(){
-  if(!strpos($_SERVER['REQUEST_URI'],"/admin.php")){header("location: ../admin.php");}
-  if(!$_SESSION['dashwall']['authenticated']){
-   // alert and redirect
-   api_alert("Authentication expired","warning");
-   api_redirect($GLOBALS['APP']->path."admin.php?mod=authentication");
-  }
+ if(!strpos($_SERVER['REQUEST_URI'],"admin.php")){api_redirect($GLOBALS['APP']->path."admin.php");}
+ if(!$_SESSION['dashwall']['authenticated']){
+  // alert and redirect
+  api_alert("Authentication expired","warning");
+  api_redirect($GLOBALS['APP']->path."admin.php?mod=authentication");
  }
+}
 
 /**
  * Dump a variable into a debug box (only if debug is enabled)
@@ -225,4 +225,36 @@ function api_timestamp_format($timestamp,$format="Y-m-d H:i:s"){
  $datetime=new DateTime("@".$timestamp);
  // return date time formatted
  return $datetime->format($format);
+}
+
+/**
+ * Parse CSV File
+ *
+ * @param string $file CSV file path
+ * @return mixed csv datas in array format or false
+ */
+function parse_csv_file($file) {
+ $csv=array();
+ $rowcount=0;
+ if(($handle=fopen($file,"r"))!==false){
+  $header=fgetcsv($handle,10000);
+  foreach($header as $id=>$h){$header[$id]=preg_replace('/[^A-Za-z0-9_]/','',$h);}
+  $header_colcount=count($header);
+  while(($row=fgetcsv($handle,10000))!==false){
+   $row_colcount=count($row);
+   if($row_colcount==$header_colcount){
+    $entry=array_combine($header,$row);
+    $csv[]=$entry;
+   }else{
+    echo "parse_csv_file: invalid number of columns at line ".($rowcount+2);
+    return false;
+   }
+   $rowcount++;
+  }
+  fclose($handle);
+ }else{
+  echo "parse_csv_file: could not read csv file ".$file;
+  return false;
+ }
+ return $csv;
 }

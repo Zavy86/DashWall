@@ -30,6 +30,7 @@
  $navbar->addElement("Datasets","admin.php?mod=datasets");
  $navbar->addElement("Datasources","admin.php?mod=datasources");
  $navbar->addElement("Schedules","admin.php?mod=schedules");
+ $navbar->addElement("Plugins","admin.php?mod=plugins");
  $navbar->addNav("navbar-right");                                                                                  /** todo right */
  $navbar->addElement(api_icon("lock","Lock"),"admin.php?mod=authentication&scr=submit&act=logout");
  // add navbar to bootstrap
