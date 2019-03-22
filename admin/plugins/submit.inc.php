@@ -53,6 +53,29 @@ function pfc(&\$return){
 }
 ?>
 EOS;
+  // build update
+  $update=<<<EOS
+<?php
+/**
+ * $r_plugin - Update Dataset
+ *
+ * @package DashWall\Plugin\\$r_plugin
+ * @author  Author <author@mail.tld>
+ * @link    https://author.web
+ */
+function pud(&\$return){
+ // errors
+ if(0){
+  \$return->error=true;
+  \$return->errors[]="error_description";
+  return;
+ }
+ // set output and return
+ \$return->output="output_result";
+ return;
+}
+?>
+EOS;
   // build script
   $script=<<<EOS
 /**
@@ -122,6 +145,7 @@ EOS;
   // write plugin files
   if(!is_dir(DIR."plugins/".$r_plugin)){mkdir(DIR."plugins/".$r_plugin,"0755");}
   file_put_contents(DIR."plugins/".$r_plugin."/functions.php",$functions);
+  file_put_contents(DIR."plugins/".$r_plugin."/update.php",$update);
   file_put_contents(DIR."plugins/".$r_plugin."/script.js",$script);
   // redirect
   api_alert("Plugin created","success");
