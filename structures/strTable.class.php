@@ -204,7 +204,7 @@ class strTable{
   // closures
   $return.=$ind."  </tbody>\n";
   $return.=$ind." </table>\n";
-  $return.=$ind." </div><!-- /table-responsive -->\n";
+  $return.=$ind."</div><!-- /table-responsive -->\n";
   // return HTML code
   return $return;
  }

@@ -25,6 +25,7 @@ class strBootstrap{
  /** Properties */
  protected $title;
  protected $sections_array;
+ protected $styles_array;
  protected $scripts_array;
  protected $modals_array;
 
@@ -36,6 +37,7 @@ class strBootstrap{
   // initialize properties
   $this->title="Bootstrap";
   $this->sections_array=array();
+  $this->styles_array=array();
   $this->scripts_array=array();
   $this->modals_array=array();
  }
@@ -81,6 +83,18 @@ class strBootstrap{
   // add content to sections array
   $this->sections_array[$section->id]=$section;
   // return
+  return true;
+ }
+
+ /**
+  * Add Style Sheet
+  *
+  * @param string $url URL of style sheet
+  * @return boolean
+  */
+ public function addStyleSheet($url){
+  if(!$url){return false;}
+  $this->styles_array[]=$url;
   return true;
  }
 
@@ -132,6 +146,9 @@ class strBootstrap{
   $return.="  <link type=\"text/css\" rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Roboto\" media=\"screen,projection\"/>\n";
   $return.="  <link type=\"text/css\" rel=\"stylesheet\" href=\"".$GLOBALS['APP']->path."helpers/bootstrap-3.4.1/css/bootstrap.min.css\" media=\"screen,projection\"/>\n";
   $return.="  <link type=\"text/css\" rel=\"stylesheet\" href=\"".$GLOBALS['APP']->path."helpers/font-awesome-4.7.0/css/font-awesome.min.css\" media=\"screen,projection\"/>\n";
+
+  foreach($this->styles_array as $url_f){$return.="  <link type=\"text/css\" rel=\"stylesheet\" href=\"".$url_f."\">\n";}
+
   $return.="  <link type=\"text/css\" rel=\"stylesheet\" href=\"".$GLOBALS['APP']->path."styles/admin.css\" media=\"screen,projection\"/>\n";
   $return.="  <link type=\"image/png\" rel=\"icon\" href=\"".$GLOBALS['APP']->path."styles/favicon.png\" sizes=\"any\"/>\n";
   $return.="  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\"/>\n";
