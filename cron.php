@@ -6,6 +6,10 @@
  * @author  Manuel Zavatta <manuel.zavatta@gmail.com>
  * @link    https://github.com/Zavy86/dashwall
  */
+ echo "Starting..";
+ // enable implicit flushing
+ ob_end_flush();
+ ob_implicit_flush();
  // load application
  require_once("loader.inc.php");
  // check for cron timestamp
@@ -34,25 +38,32 @@
  api_dump($executable_schedules_array,"executable_array");
  // cycle all executable schedules
  foreach($executable_schedules_array as $schedule_fobj){
-  // build return object
-  $return=new stdClass();
-  $return->error=false;
-  $return->errors=array();
-  $return->input=$schedule_fobj->parameters_array;
-  $return->output=null;
-  // check for plugin functions
-  if(!file_exists($APP->dir."plugins/".$schedule_fobj->plugin."/update.php")){
-   $return->error=true;
-   $return->errors[]="plugin_update_not_found";
-  }else{
-   // include plugin functions
-   require_once($APP->dir."plugins/".$schedule_fobj->plugin."/update.php");
-   // call plugin main function
-   pud($return);
-  }
+  echo "<br>Updating ".$schedule_fobj->title."..";
+  // build post data
+  $post_data=$schedule_fobj->parameters_array;
+  $post_data['plugin']=$schedule_fobj->plugin;
+  // build http options
+  $options=array(
+   "http"=>array(
+    "header"=>"Content-type: application/x-www-form-urlencoded\r\n",
+    "method"=>"POST",
+    "content"=>http_build_query($post_data),
+    "timeout"=>3600
+   ),
+  );
+  // make stram context
+  $context=stream_context_create($options);
+  // get from http
+  $response=file_get_contents($APP->url."pud.php",false,$context);
+  // decode result
+  $return=json_decode($response,true);
+  // check response
+  if($return['error']){echo " [Failed]";}else{echo " [Ok]";}
   // debug
   api_dump($return,$schedule_fobj->title);
  }
+ // end
+ echo "<br>Completed!";
  // debug
  api_dump($APP,"Dash|Wall");
  api_dump($DB,"Database");
