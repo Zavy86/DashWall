@@ -226,3 +226,35 @@ function api_timestamp_format($timestamp,$format="Y-m-d H:i:s"){
  // return date time formatted
  return $datetime->format($format);
 }
+
+/**
+ * Parse CSV File
+ *
+ * @param string $file CSV file path
+ * @return mixed csv datas in array format or false
+ */
+function parse_csv_file($file) {
+ $csv=array();
+ $rowcount=0;
+ if(($handle=fopen($file,"r"))!==false){
+  $header=fgetcsv($handle,10000);
+  foreach($header as $id=>$h){$header[$id]=preg_replace('/[^A-Za-z0-9_]/','',$h);}
+  $header_colcount=count($header);
+  while(($row=fgetcsv($handle,10000))!==false){
+   $row_colcount=count($row);
+   if($row_colcount==$header_colcount){
+    $entry=array_combine($header,$row);
+    $csv[]=$entry;
+   }else{
+    echo "parse_csv_file: invalid number of columns at line ".($rowcount+2);
+    return false;
+   }
+   $rowcount++;
+  }
+  fclose($handle);
+ }else{
+  echo "parse_csv_file: could not read csv file ".$file;
+  return false;
+ }
+ return $csv;
+}
