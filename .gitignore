@@ -7,6 +7,7 @@ config.inc.php
 
 /plugins/*
 !/plugins/dwp_kpi/
+!/plugins/dwp_bar/
 !/plugins/dwp_trend/
 !/plugins/dwp_datetime/
 
