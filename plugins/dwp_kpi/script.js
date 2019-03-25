@@ -6,21 +6,17 @@
  * @link    https://github.com/Zavy86/dashwall
  */
 function dwp_kpi(options){
-
+ // debug
  console.log("dw_kpi initialization: "+options.uid);
  console.log(options);
-
- /* get and resize canvas */
+ // get and resize canvas
  var canvas=document.getElementById("canvas_"+options.uid);
  canvas.width=canvas.parentNode.clientWidth;
  canvas.height=canvas.parentNode.clientHeight;
-
- /* initial refresh */
+ // initial refresh
  refresh();
-
- /* interval refresh */
+ // interval refresh
  if(options.refresh>0){setInterval(function(){refresh();},options.refresh);}
-
  /* refresh function */
  function refresh(){
   $.ajax({
@@ -45,13 +41,11 @@ function dwp_kpi(options){
    }
   });
  }
-
  /* update function */
  function update(response){
   // debug
   console.log("dwp_kpi refresh: "+options.uid);
   console.log(response);
-
   var ctx=canvas.getContext('2d');
   ctx.fillStyle = options.color;
   ctx.clearRect(0,0,canvas.width,canvas.height)
@@ -61,5 +55,4 @@ function dwp_kpi(options){
   ctx.font = "16px Roboto";
   ctx.fillText(response.output.description,(canvas.width/2),(canvas.height/2)+32);
  }
-
 }
