@@ -31,6 +31,10 @@
   // check for duplicated
   if(is_dir(DIR."plugins/".$r_plugin)){api_alert("Plugin already exists","danger");api_redirect("admin.php?mod=".MODULE."&scr=plugin_list");}
   // build functions
+  $index=<<<EOS
+<?php header("location: ../index.php"); ?>
+EOS;
+  // build functions
   $functions=<<<EOS
 <?php
 /**
@@ -144,6 +148,7 @@ function $r_plugin(options){
 EOS;
   // write plugin files
   if(!is_dir(DIR."plugins/".$r_plugin)){mkdir(DIR."plugins/".$r_plugin,"0755");}
+  file_put_contents(DIR."plugins/".$r_plugin."/index.php",$index);
   file_put_contents(DIR."plugins/".$r_plugin."/functions.php",$functions);
   file_put_contents(DIR."plugins/".$r_plugin."/update.php",$update);
   file_put_contents(DIR."plugins/".$r_plugin."/script.js",$script);

@@ -58,7 +58,7 @@
   // decode result
   $return=json_decode($response,true);
   // check response
-  if($return['error']){echo " [Failed]";}else{echo " [Ok]";}
+  if($return['error']===false){echo " [Ok]";}else{echo " [Failed]";}
   // debug
   api_dump($return,$schedule_fobj->title);
  }
