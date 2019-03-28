@@ -6,10 +6,14 @@
  * @author  Manuel Zavatta <manuel.zavatta@gmail.com>
  * @link    https://github.com/Zavy86/dashwall
  */
- echo "Starting..";
+ set_time_limit(0);
+ ignore_user_abort(true);
  // enable implicit flushing
  ob_end_flush();
  ob_implicit_flush();
+ // definitions
+ $cron_response=array();
+ $cron_response[]=date("Y-m-d H:i:s")." Starting..";
  // load application
  require_once("loader.inc.php");
  // check for cron timestamp
@@ -38,7 +42,7 @@
  api_dump($executable_schedules_array,"executable_array");
  // cycle all executable schedules
  foreach($executable_schedules_array as $schedule_fobj){
-  echo "<br>Updating ".$schedule_fobj->title."..";
+  $updating_log="Updating ".$schedule_fobj->title."..";
   // build post data
   $post_data=$schedule_fobj->parameters_array;
   $post_data['plugin']=$schedule_fobj->plugin;
@@ -58,12 +62,15 @@
   // decode result
   $return=json_decode($response,true);
   // check response
-  if($return['error']===false){echo " [Ok]";}else{echo " [Failed]";}
+  if($return['error']===false){$updating_log.=" [Ok]";}else{$updating_log.=" [Failed]";}
+  $cron_response[]=$updating_log;
   // debug
   api_dump($return,$schedule_fobj->title);
  }
  // end
- echo "<br>Completed!";
+ $cron_response[]=date("Y-m-d H:i:s")." Completed!\n";
+ // echo result
+ echo implode("\n",$cron_response);
  // debug
  api_dump($APP,"Dash|Wall");
  api_dump($DB,"Database");
