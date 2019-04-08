@@ -17,15 +17,17 @@
  // build form
  $form=new strForm("admin.php?mod=".MODULE."&scr=submit&act=schedule_save&idSchedule=".$schedule_obj->id."&return_scr=".api_return_script("schedule_view"),"POST",null,"schedule_edit");
  $form->addField("text","title","Schedule",$schedule_obj->title,"Schedule description",null,null,null,"required");
- $form->addField("select","hours","Hours",$schedule_obj->hours,"Select an option..",null,null,null,"required");
+ $form->addField("text","hours","Hours",$schedule_obj->hours,"Examples:0,8,16,23,...",null,null,null,"required");
+ /*$form->addField("select","hours","Hours",$schedule_obj->hours,"Select an option..",null,null,null,"required");
  $form->addFieldOption("*","Every hours");
- for($h=0;$h<=23;$h++){$form->addFieldOption($h,"At ".$h." hours");}
- $form->addField("select","minutes","Minutes",$schedule_obj->minutes,"Select an option..",null,null,null,"required");
+ for($h=0;$h<=23;$h++){$form->addFieldOption($h,"At ".$h." hours");}*/
+ $form->addField("text","minutes","Minutes",$schedule_obj->minutes,"Examples: 0,3,5,15,30,45,*/5,*/15,*/30,...",null,null,null,"required");
+ /*$form->addField("select","minutes","Minutes",$schedule_obj->minutes,"Select an option..",null,null,null,"required");
  $form->addFieldOption("*","Every minutes");
- $form->addFieldOption("*/5","Every 5 minutes");
- $form->addFieldOption("*/15","Every 15 minutes");
- $form->addFieldOption("*/30","Every 30 minutes");
- $form->addFieldOption("0","At o'clock");
+ $form->addFieldOption("*_/5","Every 5 minutes");
+ $form->addFieldOption("*_/15","Every 15 minutes");
+ $form->addFieldOption("*_/30","Every 30 minutes");
+ $form->addFieldOption("0","At o'clock");*/
  $form->addField("select","plugin","Plugin",$schedule_obj->plugin,"Select a plugin..",null,null,null,"required");
  // scan plugin directory
  $plugins=scandir($APP->dir."plugins");

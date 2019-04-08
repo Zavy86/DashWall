@@ -18,13 +18,22 @@
  require_once("loader.inc.php");
  // check for cron timestamp
  function check_cron($schedule_obj){
-  if($schedule_obj->hours=="*" && $schedule_obj->minutes=="*"){return true;}
-  if($schedule_obj->hours=="*" || $schedule_obj->hours==intval(date('H'))){
-   if($schedule_obj->minutes=="*"){return true;}
-   if($schedule_obj->minutes==intval(date('i'))){return true;}
-   if($schedule_obj->minutes=="*/5" && in_array(intval(date('i')),array(0,5,10,15,20,25,30,35,40,45,50,55))){return true;}
-   if($schedule_obj->minutes=="*/15" && in_array(intval(date('i')),array(0,15,30,45))){return true;}
-   if($schedule_obj->minutes=="*/30" && in_array(intval(date('i')),array(0,30))){return true;}
+  // definitions
+  $hour_check=false;
+  $minute_check=false;
+  // check hours
+  $hours=explode(",",$schedule_obj->hours);
+  foreach($hours as $hour){if($hour=="*" || $hour==intval(date('H'))){$hour_check=true;continue;}}
+  // check monites
+  if($hour_check){
+   $minutes=explode(",",$schedule_obj->minutes);
+   foreach($minutes as $minute){
+    if($minute=="*"){return true;}
+    if($minute==intval(date('i'))){return true;}
+    if($minute=="*/5" && in_array(intval(date('i')),array(0,5,10,15,20,25,30,35,40,45,50,55))){return true;}
+    if($minute=="*/15" && in_array(intval(date('i')),array(0,15,30,45))){return true;}
+    if($minute=="*/30" && in_array(intval(date('i')),array(0,30))){return true;}
+   }
   }
   return false;
  }
