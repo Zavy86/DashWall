@@ -67,8 +67,7 @@
   // make stram context
   $context=stream_context_create($options);
   // get from http
-  //$response=file_get_contents($APP->url."pud.php",false,$context);
-  api_dump($APP->url."pud.php");
+  $response=file_get_contents($APP->url."pud.php",false,$context);
   // decode result
   $return=json_decode($response,true);
   // check response
