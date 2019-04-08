@@ -13,6 +13,7 @@
 class Datasource{
 
  /** Properties */
+ private $connection;
  protected $id;
  protected $code;
  protected $description;
@@ -33,6 +34,7 @@ class Datasource{
   if(is_string($datasource)){$datasource=$GLOBALS['DB']->queryUniqueObject("SELECT * FROM `dashwall__datasources` WHERE `code`='".$datasource."'");}
   if(!$datasource->id){return false;}
   // initialize properties
+  $this->connection=false;
   $this->id=(int)$datasource->id;
   $this->code=stripslashes($datasource->code);
   $this->description=stripslashes($datasource->description);
@@ -62,30 +64,38 @@ class Datasource{
   * @return Query results array
   */
  public function query($sql_query){
-  // connection
-  try{
-   // make pdo dns
-   switch($this->connector){
-    case "oci":$pdo_dsn="oci:dbname=".$this->tns;break;
-    default:$pdo_dsn=$this->connector.":host=".$this->hostname.";dbname=".$this->database;
-   }
-   // build pdo object
-   $pdo_db=new PDO($pdo_dsn,$this->username,$this->password);
-   $pdo_db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-  }catch(PDOException $e){echo $e->getMessage();}
-  // execute datasource queries
-  if($this->queries){
-   // cycle all queries
-   $queries_array=explode(";",$this->queries);
-   foreach($queries_array as $query){
-    if(!strlen($query)){continue;}
-    try{
-     $pdo_statement=$pdo_db->query($query);
-    }catch(PDOException $e){
-     api_dump($e->getMessage(),"pdo_exception");
-     api_dump($sql_query,"sql_query");
+  // check for connection
+  if($this->connection){
+   // get connection
+   $pdo_db=$this->connection;
+  }else{
+   // try to make connection
+   try{
+    // make pdo dns
+    switch($this->connector){
+     case "oci":$pdo_dsn="oci:dbname=".$this->tns;break;
+     default:$pdo_dsn=$this->connector.":host=".$this->hostname.";dbname=".$this->database;
+    }
+    // build pdo object
+    $pdo_db=new PDO($pdo_dsn,$this->username,$this->password);
+    $pdo_db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+   }catch(PDOException $e){echo $e->getMessage();}
+   // execute datasource queries
+   if($this->queries){
+    // cycle all queries
+    $queries_array=explode(";",$this->queries);
+    foreach($queries_array as $query){
+     if(!strlen($query)){continue;}
+     try{
+      $pdo_statement=$pdo_db->query($query);
+     }catch(PDOException $e){
+      api_dump($e->getMessage(),"pdo_exception");
+      api_dump($sql_query,"sql_query");
+     }
     }
    }
+   // set connection
+   $this->connection=$pdo_db;
   }
   // execution
   try{
