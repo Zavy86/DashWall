@@ -11,6 +11,8 @@ config.inc.php
 !/plugins/dwp_trend/
 !/plugins/dwp_datetime/
 
+/logs/*
+
 /tmp/*
 
 !index.php

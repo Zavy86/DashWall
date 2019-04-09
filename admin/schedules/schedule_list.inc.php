@@ -19,6 +19,7 @@
  $table->addHeader("Plugin",null,"100%");
  $table->addHeader("Hours","nowrap text-right");
  $table->addHeader("Minutes","nowrap text-right");
+ $table->addHeader("&nbsp;");
  // get schedules
  $schedules_array=array();
  $results=$GLOBALS['DB']->queryObjects("SELECT * FROM `dashwall__schedules` ORDER BY `title` ASC");
@@ -38,7 +39,10 @@
   $table->addRowField(api_tag("samp",$td_plugin));
   $table->addRowField($schedule_fobj->hours." ","nowrap text-right");
   $table->addRowField($schedule_fobj->minutes." ","nowrap text-right");
+  $table->addRowFieldAction("admin.php?mod=schedules&scr=schedule_list&act=log_view&idSchedule=".$schedule_fobj->id,api_icon("align-left","View this schedule log"));
  }
+ // include modals
+ require_once("schedule_list-log.inc.php");
  // build grid
  $grid=new strGrid();
  // add grid row
