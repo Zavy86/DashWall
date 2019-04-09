@@ -216,13 +216,17 @@ function api_parse_url($url=null){
  * Timestamp Format
  *
  * @param integer $timestamp Unix timestamp
- * @param string $format Date Time format (see php.net/manual/en/function.date.php)        /** @todo integrare eurore/rome timezone
+ * @param string $format Date Time format (see php.net/manual/en/function.date.php)
+ * @param string $timezone Timezone (in format eurore/rome)
  * @return string|boolean Formatted timestamp or false
  */
-function api_timestamp_format($timestamp,$format="Y-m-d H:i:s"){
+function api_timestamp_format($timestamp,$format="Y-m-d H:i:s",$timezone=null){
  if(!is_numeric($timestamp) || $timestamp==0){return false;}
+ if(!$timezone){$timezone=date_default_timezone_get();}
  // build date time object
  $datetime=new DateTime("@".$timestamp);
+ // set date time timezone
+ $datetime->setTimeZone(new DateTimeZone($timezone));
  // return date time formatted
  return $datetime->format($format);
 }
