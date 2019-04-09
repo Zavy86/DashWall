@@ -73,6 +73,8 @@
   // check response
   if($return['error']===false){$updating_log.=" [Ok]";}else{$updating_log.=" [Failed]";}
   $cron_response[]=$updating_log;
+  // save log
+  file_put_contents($APP->dir."logs/".$schedule_fobj->id.".execution.log",$updating_log);
   // debug
   api_dump($return,$schedule_fobj->title);
  }
