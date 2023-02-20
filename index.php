@@ -11,8 +11,7 @@
  // include dashboard class
  require_once(DIR."classes/Dashboard.class.php");
  // acquire variables
- $r_dashboard=$_REQUEST['dashboard'];
- if(!$r_dashboard){$r_dashboard="default";}
+ $r_dashboard=$_REQUEST['dashboard']??"default";
  // initialize dashboard
  $dashboard=new Dashboard($r_dashboard);
  // renderize dashboard

@@ -30,7 +30,7 @@
  // cycle all plugins
  foreach($plugins_array as $plugin_f){
   // check selected
-  if($plugin_f==$_REQUEST['plugin']){$tr_class="info";}else{$tr_class=null;}
+  if($plugin_f==($_REQUEST['plugin']??null)){$tr_class="info";}else{$tr_class=null;}
   // add table datas
   $table->addRow($tr_class);
   $table->addRowFieldAction("admin.php?mod=plugins&scr=plugin_view&plugin=".$plugin_f,api_icon("search","View plugin"));

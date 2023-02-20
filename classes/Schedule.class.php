@@ -26,7 +26,7 @@ class Schedule{
  public function __construct($schedule){
   // load object
   if(is_numeric($schedule)){$schedule=$GLOBALS['DB']->queryUniqueObject("SELECT * FROM `dashwall__schedules` WHERE `id`='".$schedule."'");}
-  if(!$schedule->id){return false;}
+  if(!isset($schedule->id)){return false;}
   // initialize properties
   $this->id=(int)$schedule->id;
   $this->title=stripslashes($schedule->title);
@@ -44,6 +44,6 @@ class Schedule{
   * @param string $property Property name
   * @return type Property value
   */
- public function __get($property){return $this->$property;}
+ public function __get($property){return $this->$property??null;}
 
 }

@@ -40,7 +40,7 @@ EOS;
  // cycle all results
  foreach($datas as $data_f){
   // check selected
-  if($data_f->id==$_REQUEST['id']){$tr_class="info";}else{$tr_class=null;}
+  if($data_f->id==($_REQUEST['id']??null)){$tr_class="info";}else{$tr_class=null;}
   // add table datas
   $table->addRow($tr_class);
   foreach($fields as $field_f){$table->addRowField($data_f->{$field_f->field},"nowrap");}

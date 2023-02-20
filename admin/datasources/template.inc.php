@@ -12,7 +12,7 @@ $nav=new strNav("nav-tabs");
 $nav->setTitle("Datasources");
 $nav->addItem("Datasources","admin.php?mod=".MODULE."&scr=datasource_list");
 // operations
-if($datasource_obj->id && in_array(SCRIPT,array("datasource_view","datasource_edit"))){
+if(isset($datasource_obj) && $datasource_obj->id && in_array(SCRIPT,array("datasource_view","datasource_edit"))){
  $nav->addItem("Operations",null,null,"active");
  $nav->addSubItem("Edit datasource","admin.php?mod=".MODULE."&scr=datasource_edit&idDatasource=".$datasource_obj->id);
  $nav->addSubItem("Test connection","admin.php?mod=".MODULE."&scr=submit&act=datasource_test&idDatasource=".$datasource_obj->id);

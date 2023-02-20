@@ -21,11 +21,11 @@
   * Authentication Login
   */
  function authentication_login(){
-  api_dump($_REQUEST,"_REQUEST");
+  //api_dump($_REQUEST,"_REQUEST");
   // build and include configuration
   $configuration=new stdClass();
   include("config.inc.php");
-  api_dump($configuration);
+  //api_dump($configuration);
   // check authentication
   if(md5($_REQUEST['password'])===$configuration->authentication){
    // renew session

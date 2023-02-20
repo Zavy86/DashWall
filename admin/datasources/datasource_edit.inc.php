@@ -8,12 +8,12 @@
  */
  checkAuthorizations();
  // get object
- $datasource_obj=new Datasource($_REQUEST['idDatasource']);
+ $datasource_obj=new Datasource(($_REQUEST['idDatasource']??null));
  // include template
  require_once("template.inc.php");
  // set title
- if(!$datasource_obj->id){$bootstrap->setTitle("Add new datasource");}
- else{$bootstrap->setTitle("Edit ".$datasource_obj->title);}
+ if(!isset($datasource_obj->id)){$bootstrap->setTitle("Add new datasource");}
+ else{$bootstrap->setTitle("Edit ".$datasource_obj->description);}
  // build form
  $form=new strForm("admin.php?mod=".MODULE."&scr=submit&act=datasource_save&idDatasource=".$datasource_obj->id."&return_scr=".api_return_script("datasource_view"),"POST",null,"datasource_edit");
  $form->addField("text","code","Code",$datasource_obj->code,"Datasource code",null,null,null,"required");

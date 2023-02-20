@@ -9,7 +9,7 @@
  set_time_limit(0);
  ignore_user_abort(true);
  // enable implicit flushing
- ob_end_flush();
+ @ob_end_flush();
  ob_implicit_flush();
  // definitions
  $cron_response=array();
@@ -68,6 +68,7 @@
   $context=stream_context_create($options);
   // get from http
   $response=file_get_contents($APP->url."pud.php",false,$context);
+	var_dump($response);
   // decode result
   $return=json_decode($response,true);
   // check response

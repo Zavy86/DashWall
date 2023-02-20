@@ -1,7 +1,4 @@
-/nbproject/
-
-/.well-know/
-.htaccess
+.idea/
 
 config.inc.php
 

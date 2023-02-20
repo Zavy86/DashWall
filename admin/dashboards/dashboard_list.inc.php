@@ -28,7 +28,7 @@
   $ob->addElement("admin.php?mod=dashboards&scr=dashboard_edit&idDashboard=".$dashboard_fobj->id."&return_scr=dashboard_list","fa-pencil","Edit this dashboard");
   $ob->addElement("index.php?dashboard=".$dashboard_fobj->id,"fa-th-large","Preview this dashboard",true,null,null,null,null,"_blank");
   // check selected
-  if($dashboard_fobj->id==$_REQUEST['idDashboard']){$tr_class="info";}else{$tr_class=null;}
+  if($dashboard_fobj->id==($_REQUEST['idDashboard']??null)){$tr_class="info";}else{$tr_class=null;}
   // add table datas
   $table->addRow($tr_class);
   $table->addRowFieldAction("admin.php?mod=dashboards&scr=dashboard_view&idDashboard=".$dashboard_fobj->id,api_icon("search","View dashboard"));

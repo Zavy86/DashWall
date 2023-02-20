@@ -45,6 +45,6 @@ class Application{
   * @param string $property Property name
   * @return type Property value
   */
- public function __get($property){return $this->$property;}
+ public function __get($property){return $this->$property??null;}
 
 }

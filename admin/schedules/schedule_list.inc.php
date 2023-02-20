@@ -27,7 +27,7 @@
  // cycle all schedules
  foreach($schedules_array as $schedule_fobj){
   // check selected
-  if($schedule_fobj->id==$_REQUEST['idSchedule']){$tr_class="info";}else{$tr_class=null;}
+  if($schedule_fobj->id==($_REQUEST['idSchedule']??null)){$tr_class="info";}else{$tr_class=null;}
   // make td plugin
   $td_plugin=$schedule_fobj->plugin."(";
   if(count($schedule_fobj->parameters_array)){$td_plugin.=stripslashes(json_encode($schedule_fobj->parameters_array));}
@@ -35,7 +35,7 @@
   // add table datas
   $table->addRow($tr_class);
   $table->addRowFieldAction("admin.php?mod=schedules&scr=schedule_edit&idSchedule=".$schedule_fobj->id,api_icon("pencil","Edit this schedule"));
-  $table->addRowField($schedule_fobj->title);
+  $table->addRowField($schedule_fobj->title,"nowrap");
   $table->addRowField(api_tag("samp",$td_plugin));
   $table->addRowField($schedule_fobj->hours." ","nowrap text-right");
   $table->addRowField($schedule_fobj->minutes." ","nowrap text-right");

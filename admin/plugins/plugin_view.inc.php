@@ -30,7 +30,7 @@
  // cycle all plugins
  foreach($files_array as $file_f){
   // check selected
-  if($file_f==$_REQUEST['file']){$tr_class="info";}else{$tr_class=null;}
+  if($file_f==($_REQUEST['file']??null)){$tr_class="info";}else{$tr_class=null;}
   // add table datas
   $table_file->addRow($tr_class);
   $table_file->addRowFieldAction("admin.php?mod=plugins&scr=plugin_file_edit&plugin=".$r_plugin."&file=".$file_f,api_icon("pencil","Edit plugin file"));

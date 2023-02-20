@@ -14,7 +14,7 @@ require_once("functions.inc.php");
 api_session_start();
 
 // check debug from session
-if($_SESSION['dashwall']['debug']){$debug=true;}
+if(isset($_SESSION['dashwall']['debug']) && $_SESSION['dashwall']['debug']){$debug=true;}else{$debug=false;}
 
 // check debug from requests
 if(isset($_GET['debug'])){

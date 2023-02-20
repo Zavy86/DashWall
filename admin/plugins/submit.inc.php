@@ -147,7 +147,7 @@ function $r_plugin(options){
 }
 EOS;
   // write plugin files
-  if(!is_dir(DIR."plugins/".$r_plugin)){mkdir(DIR."plugins/".$r_plugin,"0755");}
+  if(!is_dir(DIR."plugins/".$r_plugin)){mkdir(DIR."plugins/".$r_plugin);}
   file_put_contents(DIR."plugins/".$r_plugin."/index.php",$index);
   file_put_contents(DIR."plugins/".$r_plugin."/functions.php",$functions);
   file_put_contents(DIR."plugins/".$r_plugin."/update.php",$update);

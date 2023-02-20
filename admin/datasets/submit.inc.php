@@ -55,14 +55,14 @@ EOS;
   // check object
   if($r_id){
    // update
-   $GLOBALS['DB']->queryUpdate($r_dataset,$dataset_qobj);
-   // alert
-   api_alert("Dataset updated","success");
+   if($GLOBALS['DB']->queryUpdate($r_dataset,$dataset_qobj)){api_alert("Dataset element updated","success");}
+	 else{api_alert("Dataset element updating error","danger");}
   }else{
    // insert
    $dataset_qobj->id=$GLOBALS['DB']->queryInsert($r_dataset,$dataset_qobj);
    // alert
-   api_alert("Dataset created","success");
+   if($dataset_qobj->id){api_alert("Dataset element created","success");}
+	 else{api_alert("Dataset element creating error","danger");}
   }
   // redirect
   api_redirect("admin.php?mod=".MODULE."&scr=".api_return_script("dataset_view")."&dataset=".$r_dataset."&id=".$dataset_qobj->id);
@@ -83,6 +83,6 @@ EOS;
   // check query result
   if(!$deleted){api_alert("An error has occurred","danger");api_redirect("admin.php?mod=".MODULE."&scr=dataset_view&dataset=".$r_dataset);}
   // alert and redirect
-  api_alert("Dataset removed","warning");
+  api_alert("Dataset element removed","warning");
   api_redirect("admin.php?mod=".MODULE."&scr=dataset_view&dataset=".$r_dataset);
  }

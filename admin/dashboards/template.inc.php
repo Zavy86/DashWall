@@ -12,7 +12,7 @@ $nav=new strNav("nav-tabs");
 $nav->setTitle("Dashboards");
 $nav->addItem("Dashboards","admin.php?mod=".MODULE."&scr=dashboard_list");
 // operations
-if($dashboard_obj->id && in_array(SCRIPT,array("dashboard_view","dashboard_edit"))){
+if(isset($dashboard_obj) && $dashboard_obj->id && in_array(SCRIPT,array("dashboard_view","dashboard_edit"))){
  $nav->addItem("Operations",null,null,"active");
  $nav->addSubItem("Edit dashboard","admin.php?mod=".MODULE."&scr=dashboard_edit&idDashboard=".$dashboard_obj->id);
  $nav->addSubItem("Reorder tiles","admin.php?mod=".MODULE."&scr=submit&act=dashboard_tile_reorder&idDashboard=".$dashboard_obj->id);

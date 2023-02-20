@@ -14,12 +14,12 @@ function api_session_start(){
  // start php session
  session_start();
  // check for application session array
- if(!is_array($_SESSION['dashwall'])){
+ if(!isset($_SESSION['dashwall']) || !is_array($_SESSION['dashwall'])){
   $_SESSION['dashwall']=array();
   $_SESSION['dashwall']['authenticated']=false;
  }
  // check for application session alerts array
- if(!is_array($_SESSION['dashwall']['alerts'])){$_SESSION['dashwall']['alerts']=array();}
+ if(!isset($_SESSION['dashwall']['alerts']) || !is_array($_SESSION['dashwall']['alerts'])){$_SESSION['dashwall']['alerts']=array();}
 }
 
 /**
@@ -74,12 +74,8 @@ function api_redirect($location){
  */
 function api_return_script($default){
  if(!$default){return false;}
- // get return script
- $return=$_REQUEST['return_scr'];
- // if not found return default
- if(!$return){$return=$default;}
  // return
- return $return;
+ return $_REQUEST['return_scr']??$default;
 }
 
 /**

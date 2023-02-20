@@ -8,8 +8,8 @@
  */
  checkAuthorizations();
  // acquire variables
- $r_plugin=$_REQUEST['plugin'];
- $r_file=$_REQUEST['file'];
+ $r_plugin=$_REQUEST['plugin']??null;
+ $r_file=$_REQUEST['file']??null;
  // include template
  require_once("template.inc.php");
  // checks
@@ -18,7 +18,7 @@
  // set title
  if($r_file){$bootstrap->setTitle("Plugin ".$r_plugin." Edit file ".$r_file);}else{$bootstrap->setTitle("Plugin ".$r_plugin." Add new file");}
  // load source
- if($r_file){$source=file_get_contents($APP->dir."plugins/".$r_plugin."/".$r_file);}
+ if($r_file){$source=file_get_contents($APP->dir."plugins/".$r_plugin."/".$r_file);}else{$source='';}
  // build description list
  $dl=new strDescriptionList("br","dl-horizontal");
  $dl->addElement("Plugin",api_tag("samp",$r_plugin));

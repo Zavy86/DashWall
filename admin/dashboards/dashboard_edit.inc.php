@@ -8,11 +8,11 @@
  */
  checkAuthorizations();
  // get object
- $dashboard_obj=new Dashboard($_REQUEST['idDashboard']);
+ $dashboard_obj=new Dashboard(($_REQUEST['idDashboard']??null));
  // include template
  require_once("template.inc.php");
  // set title
- if(!$dashboard_obj->id){$bootstrap->setTitle("Add new dashboard");}
+ if(!isset($dashboard_obj->id)){$bootstrap->setTitle("Add new dashboard");}
  else{$bootstrap->setTitle("Edit ".$dashboard_obj->title);}
  // build form
  $form=new strForm("admin.php?mod=".MODULE."&scr=submit&act=dashboard_save&idDashboard=".$dashboard_obj->id."&return_scr=".api_return_script("dashboard_view"),"POST",null,"dashboard_edit");

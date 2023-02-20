@@ -6,11 +6,10 @@
  * @author  Manuel Zavatta <manuel.zavatta@gmail.com>
  * @link    https://github.com/Zavy86/dashwall
  */
- checkAuthorizations();
  // check for actions
  if(ACTION=="log_view"){
   // get selected tile
-  $selected_schedule_obj=new Schedule($_REQUEST['idSchedule']);
+  $selected_schedule_obj=new Schedule($_REQUEST['idSchedule']??null);
   // definitions
   $execution_log_file=$APP->dir."logs/".$selected_schedule_obj->id.".execution.log";
   $verbose_log_file=$APP->dir."logs/".$selected_schedule_obj->id.".verbose.log";
