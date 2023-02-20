@@ -1,0 +1,36 @@
+version: "3"
+
+networks:
+  stack:
+    driver: bridge
+  reverse-proxy:
+    external: true
+
+services:
+
+  nginx:
+    build:
+      context: ./..
+      dockerfile: docker/nginx/prd.Dockerfile
+    container_name: dashwall-nginx
+    hostname: dashwall
+    restart: unless-stopped
+    networks:
+      - stack
+      - reverse-proxy
+    depends_on:
+      - phpfpm
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=reverse-proxy"
+      - "traefik.http.routers.dashwall.tls=true"
+      - "traefik.http.routers.dashwall.rule=Host(`dashwall-prod.cogne.com`)"
+
+  phpfpm:
+    build:
+      context: ./..
+      dockerfile: docker/php/prd.Dockerfile
+    container_name: dashwall-phpfpm
+    restart: unless-stopped
+    networks:
+      - stack

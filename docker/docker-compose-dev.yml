@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+
+  nginx:
+    build:
+      context: ./..
+      dockerfile: docker/nginx/dev.Dockerfile
+    container_name: dashwall-nginx
+    hostname: dashwall
+    volumes:
+      - ./../:/var/www/html
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"
+    links:
+      - phpfpm
+
+  phpfpm:
+    build:
+      context: ./..
+      dockerfile: docker/php/dev.Dockerfile
+    container_name: dashwall-phpfpm
+    volumes:
+      - ./../:/var/www/html
+      - ./php/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    links:
+      - mysql
+
+  mysql:
+    image: mariadb:10.2
+    container_name: dashwall-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: database
+      MYSQL_USER: developer
+      MYSQL_PASSWORD: developer
+    volumes:
+      - ./mysql/.data:/var/lib/mysql
+    ports:
+      - "3306:3306"
