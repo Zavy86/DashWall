@@ -1,4 +1,5 @@
 .idea/
+docker/mysql/.data/
 
 config.inc.php
 
